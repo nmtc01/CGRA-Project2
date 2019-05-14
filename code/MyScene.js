@@ -10,6 +10,7 @@ class MyScene extends CGFscene {
         super.init(application);
         this.initCameras();
         this.initLights();
+        this.initMaterials();
 
         //Background color
         this.gl.clearColor(0.0, 0.0, 0.0, 1.0);
@@ -24,6 +25,7 @@ class MyScene extends CGFscene {
         //Initialize scene objects
         this.axis = new CGFaxis(this);
         this.plane = new Plane(this, 32);
+        this.house = new MyHouse(this, 0, this.house_side_mat, this.house_roof_mat, this.house_column_mat);
 
         //Objects connected to MyInterface
     }
@@ -35,6 +37,45 @@ class MyScene extends CGFscene {
     }
     initCameras() {
         this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(45, 45, 45), vec3.fromValues(0, 0, 0));
+    }
+    initMaterials() {
+        this.skybox_day_mat = new CGFappearance(this)
+        this.skybox_day_mat.setAmbient(1, 1, 1, 1);
+        this.skybox_day_mat.setDiffuse(1, 1, 1, 0.1);
+        this.skybox_day_mat.setSpecular(0.1, 0.1, 0.1, 0.11);
+        this.skybox_day_mat.setShininess(10.0);
+        this.skybox_day_mat.setTexture(this.skybox_day_text);
+
+        this.skybox_night_mat = new CGFappearance(this)
+        this.skybox_night_mat.setAmbient(1, 1, 1, 1);
+        this.skybox_night_mat.setDiffuse(1, 1, 1, 0.1);
+        this.skybox_night_mat.setSpecular(0.1, 0.1, 0.1, 0.11);
+        this.skybox_night_mat.setShininess(10.0);
+        this.skybox_night_mat.setTexture(this.skybox_night_text);
+
+        this.house_side_mat = new CGFappearance(this);
+        this.house_side_mat.setAmbient(1, 1, 1, 1.0);
+        this.house_side_mat.setDiffuse(1, 1, 1, 1);
+        this.house_side_mat.setSpecular(1, 1, 1, 0);
+        this.house_side_mat.setShininess(10.0);
+        this.house_side_mat.setTexture(this.house_side_text);
+        this.house_side_mat.setTextureWrap('REPEAT', 'REPEAT');
+
+        this.house_roof_mat = new CGFappearance(this);
+        this.house_roof_mat.setAmbient(1, 1, 1, 1);
+        this.house_roof_mat.setDiffuse(1, 1, 1, 0);
+        this.house_roof_mat.setSpecular(1, 1, 1, 1);
+        this.house_roof_mat.setShininess(10.0);
+        this.house_roof_mat.setTexture(this.house_roof_text);
+        this.house_roof_mat.setTextureWrap('REPEAT', 'REPEAT');
+
+        this.house_column_mat = new CGFappearance(this);
+        this.house_column_mat.setAmbient(1, 1, 1, 1);
+        this.house_column_mat.setDiffuse(1, 1, 1, 1);
+        this.house_column_mat.setSpecular(1, 1, 1, 0);
+        this.house_column_mat.setShininess(10.0);
+        this.house_column_mat.setTexture(this.house_column_text);
+        this.house_column_mat.setTextureWrap('REPEAT', 'REPEAT');
     }
     setDefaultAppearance() {
         this.setAmbient(0.2, 0.4, 0.8, 1.0);
@@ -69,6 +110,7 @@ class MyScene extends CGFscene {
         this.scale(60, 60, 1);
         this.plane.display();
         this.popMatrix();
+        this.house.display();
         // ---- END Primitive drawing section
     }
 }
