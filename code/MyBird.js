@@ -5,19 +5,44 @@
 class MyBird extends CGFobject {
     constructor(scene) {
         super(scene);
-        this.body = new MyCylinder();
-        this.head = new MyCylinder();
+        this.body = new MyCylinder(scene, 5);
+        this.head = new MyCylinder(scene, 5);
         
-        this.bico = new MyCylinder();
-        this.tail = new MyTriangle();
+        this.bico = new MyCone(scene, 3);
+        this.tail = new MyTriangle(scene);
+        this.olho = new MyUnitCube(scene);
         
-        this.asa1 = new MyQuad();
-        this.asa2 = new MyTriangle();
+        this.asa1 = new MyQuad(scene, undefined);
+        this.asa2 = new MyTriangle(scene);
 
         this.asa_rot = 0;
+        this.body_rot = [0,0,0];
     }
 
-    display(){
+    display(scene){
+        scene.rotate(Math.PI, this.body_rot[0],
+                              this.body_rot[1],
+                              this.body_rot[2]);
+
+        scene.scale(0.75,0.75,0.75);
+
+        scene.pushMatrix();
+        scene.rotate(Math.PI/2, 1, 0, 0);
+        this.body.display();
+        scene.popMatrix();
+
+        scene.pushMatrix();
+        scene.rotate(Math.PI/2, 1, 0, 0);
+        scene.translate(0, 0.5, -0.5);
+        this.head.display();
+        scene.popMatrix();
+        
+        scene.pushMatrix();
+        scene.scale(0.5,0.5,0.5);
+        scene.rotate(Math.PI/2, 1, 0, 0);
+        scene.translate(0, 3, 0);
+        this.bico.display();
+        scene.popMatrix();
 
 
 
