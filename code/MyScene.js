@@ -26,6 +26,7 @@ class MyScene extends CGFscene {
         this.axis = new CGFaxis(this);
         this.plane = new Plane(this, 32);
         this.house = new MyHouse(this, 0, this.house_side_mat, this.house_roof_mat, this.house_column_mat);
+        this.skybox = new MyCubeMap(this);
         this.bird = new MyBird(this);
 
         //Objects connected to MyInterface
@@ -40,6 +41,14 @@ class MyScene extends CGFscene {
         this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(45, 45, 45), vec3.fromValues(0, 0, 0));
     }
     initMaterials() {
+        //Textures
+        this.skybox_day_text    = new CGFtexture(this, 'images/Skybox.png');
+        this.skybox_night_text  = new CGFtexture(this, 'images/Skybox-night.png');
+        this.house_side_text    = new CGFtexture(this, 'images/house_side.png');
+        this.house_roof_text    = new CGFtexture(this, 'images/palha.jpg');
+        this.house_column_text  = new CGFtexture(this, 'images/wood.jpeg');
+
+        //Materials
         this.skybox_day_mat = new CGFappearance(this)
         this.skybox_day_mat.setAmbient(1, 1, 1, 1);
         this.skybox_day_mat.setDiffuse(1, 1, 1, 0.1);
@@ -93,6 +102,7 @@ class MyScene extends CGFscene {
         // Clear image and depth buffer everytime we update the scene
         this.gl.viewport(0, 0, this.gl.canvas.width, this.gl.canvas.height);
         this.gl.clear(this.gl.COLOR_BUFFER_BIT | this.gl.DEPTH_BUFFER_BIT);
+        this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_MAG_FILTER, this.gl.NEAREST);
         // Initialize Model-View matrix as identity (no transformation
         this.updateProjectionMatrix();
         this.loadIdentity();
@@ -106,17 +116,19 @@ class MyScene extends CGFscene {
         this.setDefaultAppearance();
 
         // ---- BEGIN Primitive drawing section
-        /*this.pushMatrix();
+        this.pushMatrix();
         this.rotate(-0.5*Math.PI, 1, 0, 0);
         this.scale(60, 60, 1);
         this.plane.display();
         this.popMatrix();
-        this.house.display();*/
+
+        /*this.house.display();
+
+        this.skybox_day_mat.apply();
+        this.skybox.display();*/
 
         this.pushMatrix();
-
         this.bird.display(this);
-
         this.popMatrix();
         // ---- END Primitive drawing section
     }
