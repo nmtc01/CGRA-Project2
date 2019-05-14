@@ -62,6 +62,20 @@ class MyBird extends CGFobject {
         scene.translate(-5, 4, 7);
         this.olho.display();
         scene.popMatrix();
+        
+        scene.pushMatrix();
+        //scene.scale(0.4,0.4,0.4);
+        scene.rotate(Math.PI/2, 1, 0, 0);
+        scene.translate(1.5, 0.5, 0);
+        this.asa1.display();
+        scene.popMatrix();
+        
+        scene.pushMatrix();
+        scene.scale(0.4,0.4,0.4);
+        scene.translate(7, 4, 7);
+        this.asa2.display();
+        scene.popMatrix();
+        
 
 
 

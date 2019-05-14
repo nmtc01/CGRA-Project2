@@ -116,16 +116,19 @@ class MyScene extends CGFscene {
         this.setDefaultAppearance();
 
         // ---- BEGIN Primitive drawing section
+        /*
         this.pushMatrix();
         this.rotate(-0.5*Math.PI, 1, 0, 0);
         this.scale(60, 60, 1);
         this.plane.display();
         this.popMatrix();
+        */
 
-        /*this.house.display();
-
+        /*
+        this.house.display();
         this.skybox_day_mat.apply();
-        this.skybox.display();*/
+        this.skybox.display();
+        */
 
         this.pushMatrix();
         this.bird.display(this);
