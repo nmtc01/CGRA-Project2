@@ -33,6 +33,7 @@ class MyBird extends CGFobject {
         scene.popMatrix();
 
         scene.pushMatrix();
+        scene.scale(1,1,1.2);
         scene.rotate(Math.PI/2, 0, 1, 0);
         scene.rotate(Math.PI/2, 0, 0, 1);
         scene.translate(0.5, 0.5, 0);
@@ -41,8 +42,9 @@ class MyBird extends CGFobject {
         
         scene.pushMatrix();
         scene.scale(0.5,0.5,0.5);
-        scene.rotate(Math.PI/2, 1, 0, 0);
-        scene.translate(0, 3, 0);
+        scene.rotate(Math.PI/2, 0, 1, 0);
+        scene.rotate(Math.PI/2, 0, 0, 1);
+        scene.translate(0, 3.5, 0);
         this.bico.display();
         scene.popMatrix();
         
@@ -55,13 +57,13 @@ class MyBird extends CGFobject {
         
         scene.pushMatrix();
         scene.scale(0.2,0.2,0.2);
-        scene.translate(5, 4, 7);
+        scene.translate(5, 4, 7.5);
         this.olho.display();
         scene.popMatrix();
         
         scene.pushMatrix();
         scene.scale(0.2,0.2,0.2);
-        scene.translate(-5, 4, 7);
+        scene.translate(-5, 4, 7.5);
         this.olho.display();
         scene.popMatrix();
         
