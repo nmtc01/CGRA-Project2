@@ -29,6 +29,8 @@ class MyScene extends CGFscene {
         this.skybox = new MyCubeMap(this);
         this.bird = new MyBird(this);
 
+        this.cyl = new MyCylinder(this, 5);
+
         //Objects connected to MyInterface
     }
     initLights() {
@@ -38,7 +40,7 @@ class MyScene extends CGFscene {
         this.lights[0].update();
     }
     initCameras() {
-        this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(45, 45, 45), vec3.fromValues(0, 0, 0));
+        this.camera = new CGFcamera(0.4, 0.1, 100, vec3.fromValues(10, 10, 10), vec3.fromValues(0, 0, 0));
     }
     initMaterials() {
         //Textures
@@ -129,10 +131,12 @@ class MyScene extends CGFscene {
         this.skybox_day_mat.apply();
         this.skybox.display();
         */
-
+/*
         this.pushMatrix();
         this.bird.display(this);
-        this.popMatrix();
+        this.popMatrix();*/
+
+        this.cyl.display();
         // ---- END Primitive drawing section
     }
 }
