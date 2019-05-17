@@ -55,10 +55,31 @@ class MyCylinder extends CGFobject {
         
         this.texCoords.push(sa, 0);
         this.texCoords.push(sa, 1);
-        
-        // TOPS
-        ang = 0;
-        alphaAng = 2*Math.PI/this.slices;
+            
+        this.primitiveType = this.scene.gl.TRIANGLES;
+        this.initGLBuffers();
+    }
+}
+
+/**
+* MyCylinderTop
+* @constructor
+*/
+class MyTop extends CGFobject {
+    constructor(scene, slices) {
+        super(scene);
+        this.slices = slices;
+        this.initBuffers();
+    }
+    initBuffers() {
+        this.vertices = [];
+        this.indices = [];
+        this.normals = [];
+        this.texCoords = [];
+
+        var ang = 0;
+        var alphaAng = 2*Math.PI/this.slices;
+
         for(var i = 0; i < this.slices - 1; i++){
             var sa=Math.sin(ang);
             var ca=Math.cos(ang);
@@ -93,12 +114,12 @@ class MyCylinder extends CGFobject {
         this.texCoords.push(sa+0.5, ca+0.5);
 
         if(this.slices > 2){
-            var lower = this.slices * 2 + 3;
-            var upper = this.slices * 2 + 5;
+            var lower = 3;
+            var upper = 5;
             for (i = 0; i < (this.slices - 2); i++){
-                this.indices.push(this.slices * 2 + 1, lower, upper);
+                this.indices.push(1, lower, upper);
                 lower -= 1; upper -= 1;
-                this.indices.push(upper, lower, this.slices * 2);
+                this.indices.push(upper, lower, 0);
                 lower += 3; upper += 3;
             }
         }
@@ -107,5 +128,3 @@ class MyCylinder extends CGFobject {
         this.initGLBuffers();
     }
 }
-
-

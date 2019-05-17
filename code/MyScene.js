@@ -29,7 +29,7 @@ class MyScene extends CGFscene {
         this.skybox = new MyCubeMap(this);
         this.bird = new MyBird(this);
 
-        this.cyl = new MyCylinder(this, 5);
+        this.cyl = new MyTopCylinder(this, 5);
 
         //Objects connected to MyInterface
     }
@@ -134,9 +134,9 @@ class MyScene extends CGFscene {
        this.house_side_mat.apply();
 
         this.pushMatrix();
-        //this.bird.display(this);
+        this.bird.display(this);
         this.popMatrix();
-        this.cyl.display();
+        //this.cyl.display();
         // ---- END Primitive drawing section
     }
 }
