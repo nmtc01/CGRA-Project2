@@ -72,8 +72,8 @@ class MyCylinder extends CGFobject {
             sa = sa / 2.0;
             ca = ca / 2.0;
             
-            this.texCoords.push(ca+0.5, sa+0.5);
-            this.texCoords.push(ca+0.5, sa+0.5);
+            this.texCoords.push(sa+0.5, ca+0.5);
+            this.texCoords.push(sa+0.5, ca+0.5);
             
             ang+=alphaAng;
         }
@@ -89,16 +89,16 @@ class MyCylinder extends CGFobject {
         sa = sa / 2.0;
         ca = ca / 2.0;
 
-        this.texCoords.push(ca+0.5, sa+0.5);
-        this.texCoords.push(ca+0.5, sa+0.5);
+        this.texCoords.push(sa+0.5, ca+0.5);
+        this.texCoords.push(sa+0.5, ca+0.5);
 
         if(this.slices > 2){
-            var lower = 3;
-            var upper = 5;
+            var lower = this.slices * 2 + 3;
+            var upper = this.slices * 2 + 5;
             for (i = 0; i < (this.slices - 2); i++){
-                this.indices.push(1, lower, upper);
+                this.indices.push(this.slices * 2 + 1, lower, upper);
                 lower -= 1; upper -= 1;
-                this.indices.push(upper, lower, 0);
+                this.indices.push(upper, lower, this.slices * 2);
                 lower += 3; upper += 3;
             }
         }
