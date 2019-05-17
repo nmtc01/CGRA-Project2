@@ -10,19 +10,19 @@ class MyBird extends CGFobject {
         
         this.bico = new MyCone(scene, 3);
         this.tail = new MyTriangle(scene);
-        this.olho = new MyUnitCube(scene);
+        this.olho = new MyUnitCubeQuad(scene, scene.house_side_mat, scene.house_side_mat, scene.house_side_mat);
         
         this.asa1 = new MyQuad(scene, undefined);
         this.asa2 = new MyTriangle(scene);
 
-        this.asa_rot = 0;
-        this.body_rot = [0,0,0];
+        this.asa_rot = [-Math.PI / 4, Math.PI/4];    //arm - forearm
+        this.body_rot = [0, 0, 0];            //pitch - yaw - roll 
     }
 
     display(scene){
-        scene.rotate(Math.PI, this.body_rot[0],
-                              this.body_rot[1],
-                              this.body_rot[2]);
+        scene.rotate(this.body_rot[0], 1,0,0);
+        scene.rotate(this.body_rot[1], 1,0,0);
+        scene.rotate(this.body_rot[2], 1,0,0);
 
         scene.scale(0.75,0.75,0.75);
 
@@ -71,6 +71,7 @@ class MyBird extends CGFobject {
         scene.pushMatrix();
         scene.rotate(Math.PI/2, 1, 0, 0);
         scene.translate(1.25, 0.5, 0);
+        scene.rotate(this.asa_rot[0], 0, -1, 0);
         this.asa1.display();
         scene.popMatrix();
         
@@ -78,6 +79,7 @@ class MyBird extends CGFobject {
         scene.scale(0.5,0.5,0.5);
         scene.rotate(Math.PI/2, 1, 0, 0);
         scene.translate(4.5, 1, 0);
+        scene.rotate(this.asa_rot[1], 0, -1, 0);
         this.asa2.display();
         scene.popMatrix();
         
@@ -85,6 +87,7 @@ class MyBird extends CGFobject {
         scene.pushMatrix();
         scene.rotate(Math.PI/2, 1, 0, 0);
         scene.translate(-1.25, 0.5, 0);
+        scene.rotate(this.asa_rot[0], 0, 1, 0);
         this.asa1.display();
         scene.popMatrix();
         
@@ -93,6 +96,7 @@ class MyBird extends CGFobject {
         scene.rotate(Math.PI, 0, 1, 0);
         scene.rotate(Math.PI/2, -1, 0, 0);
         scene.translate(4.5, 1, 0);
+        scene.rotate(this.asa_rot[1], 0, 1, 0);
         this.asa2.display();
         scene.popMatrix();
         

@@ -136,7 +136,6 @@ class MyScene extends CGFscene {
         this.pushMatrix();
         this.bird.display(this);
         this.popMatrix();
-        //this.cyl.display();
         // ---- END Primitive drawing section
     }
 }
