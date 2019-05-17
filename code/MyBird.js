@@ -22,8 +22,8 @@ class MyBird extends CGFobject {
     }
 
     display(scene){
-        scene.rotate(this.body_rot[1], 0, 1, 0);
         scene.translate(this.body_pos[0], this.body_pos[1], this.body_pos[2]);
+        scene.rotate(this.body_rot[1], 0, 1, 0);
 
         scene.scale(0.75,0.75,0.75);
 
@@ -113,6 +113,7 @@ class MyBird extends CGFobject {
 
     accelerate(v) {
         this.speed += v;
+        if (this.speed < 0) this.speed = 0;
     }
 
     reset() {

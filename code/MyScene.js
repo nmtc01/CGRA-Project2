@@ -38,7 +38,7 @@ class MyScene extends CGFscene {
         this.lights[0].update();
     }
     initCameras() {
-        this.camera = new CGFcamera(0.4, 0.1, 100, vec3.fromValues(10, 10, 10), vec3.fromValues(0, 0, 0));
+        this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(10, 10, 10), vec3.fromValues(0, 0, 0));
     }
     initMaterials() {
         //Textures
@@ -144,8 +144,10 @@ class MyScene extends CGFscene {
         var keysPressed = false;
 
         // Check for key codes e.g. in ​https://keycode.info/
-        if (this.gui.isKeyPressed("KeyW")) this.bird.accelerate(1);
-        if (this.gui.isKeyPressed("KeyS")) this.bird.accelerate(-1);
+        if (this.gui.isKeyPressed("KeyW")) this.bird.accelerate(0.01);
+        if (this.gui.isKeyPressed("KeyS")) this.bird.accelerate(-0.01);
         if (this.gui.isKeyPressed("KeyR")) this.bird.reset();
+        if (this.gui.isKeyPressed("KeyA")) this.bird.turn(0.1);
+        if (this.gui.isKeyPressed("KeyD")) this.bird.turn(-0.1);
     }
 }
