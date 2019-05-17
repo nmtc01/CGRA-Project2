@@ -15,8 +15,8 @@ class MyBird extends CGFobject {
         this.asa1 = new MyQuad(scene, undefined);
         this.asa2 = new MyTriangle(scene);
 
-        this.asa_rot = [-Math.PI / 4, Math.PI/4];    //arm - forearm
-        this.body_rot = [0, 0, 0];            //pitch - yaw - roll 
+        this.asa_rot = [-Math.PI / 4, Math.PI/4];       //arm - forearm
+        this.body_rot = [0, 0, 0];                      //pitch - yaw - roll 
     }
 
     display(scene){
@@ -71,7 +71,8 @@ class MyBird extends CGFobject {
         scene.pushMatrix();
         scene.rotate(Math.PI/2, 1, 0, 0);
         scene.translate(1.25, 0.5, 0);
-        scene.rotate(this.asa_rot[0], 0, -1, 0);
+        //scene.rotate(this.asa_rot[0], 0, -1, 0);
+        //scene.translate( -0.1, 0, -0.1);
         this.asa1.display();
         scene.popMatrix();
         
@@ -79,7 +80,7 @@ class MyBird extends CGFobject {
         scene.scale(0.5,0.5,0.5);
         scene.rotate(Math.PI/2, 1, 0, 0);
         scene.translate(4.5, 1, 0);
-        scene.rotate(this.asa_rot[1], 0, -1, 0);
+        //scene.rotate(this.asa_rot[1], 0, -1, 0);
         this.asa2.display();
         scene.popMatrix();
         
@@ -87,7 +88,7 @@ class MyBird extends CGFobject {
         scene.pushMatrix();
         scene.rotate(Math.PI/2, 1, 0, 0);
         scene.translate(-1.25, 0.5, 0);
-        scene.rotate(this.asa_rot[0], 0, 1, 0);
+        //scene.rotate(this.asa_rot[0], 0, 1, 0);
         this.asa1.display();
         scene.popMatrix();
         
@@ -96,7 +97,7 @@ class MyBird extends CGFobject {
         scene.rotate(Math.PI, 0, 1, 0);
         scene.rotate(Math.PI/2, -1, 0, 0);
         scene.translate(4.5, 1, 0);
-        scene.rotate(this.asa_rot[1], 0, 1, 0);
+        //scene.rotate(this.asa_rot[1], 0, 1, 0);
         this.asa2.display();
         scene.popMatrix();
         

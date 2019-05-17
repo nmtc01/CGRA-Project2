@@ -96,7 +96,7 @@ class MyScene extends CGFscene {
         this.setShininess(10.0);
     }
     update(t){
-
+        this.checkKeys();
     }
 
     display() {
@@ -137,5 +137,20 @@ class MyScene extends CGFscene {
         this.bird.display(this);
         this.popMatrix();
         // ---- END Primitive drawing section
+    }
+    checkKeys() {
+        var text = "Keys pressed: ";
+        var keysPressed = false;
+        // Check for key codes e.g. in ​https://keycode.info/
+        if (this.gui.isKeyPressed("KeyW")) {
+            text += " W ";
+            keysPressed = true;
+        }
+        if (this.gui.isKeyPressed("KeyS")) {
+            text += " S ";
+            keysPressed = true;
+        }
+        if (keysPressed)
+            console.log(text);
     }
 }
