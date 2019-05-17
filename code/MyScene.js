@@ -30,6 +30,8 @@ class MyScene extends CGFscene {
         this.bird = new MyBird(this);
 
         //Objects connected to MyInterface
+        this.scaleFactor = 0.5;
+        this.speedFactor = 0.5;
     }
     initLights() {
         this.lights[0].setPosition(15, 2, 5, 1);
@@ -135,6 +137,7 @@ class MyScene extends CGFscene {
        this.house_side_mat.apply();
 
         this.pushMatrix();
+        this.scale(this.scaleFactor, this.scaleFactor, this.scaleFactor);
         this.bird.display(this);
         this.popMatrix();
         // ---- END Primitive drawing section
@@ -144,8 +147,8 @@ class MyScene extends CGFscene {
         var keysPressed = false;
 
         // Check for key codes e.g. in ​https://keycode.info/
-        if (this.gui.isKeyPressed("KeyW")) this.bird.accelerate(0.01);
-        if (this.gui.isKeyPressed("KeyS")) this.bird.accelerate(-0.01);
+        if (this.gui.isKeyPressed("KeyW")) this.bird.accelerate(this.speedFactor);
+        if (this.gui.isKeyPressed("KeyS")) this.bird.accelerate(this.speedFactor);
         if (this.gui.isKeyPressed("KeyR")) this.bird.reset();
         if (this.gui.isKeyPressed("KeyA")) this.bird.turn(0.1);
         if (this.gui.isKeyPressed("KeyD")) this.bird.turn(-0.1);
