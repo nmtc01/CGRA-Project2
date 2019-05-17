@@ -131,12 +131,12 @@ class MyScene extends CGFscene {
         this.skybox_day_mat.apply();
         this.skybox.display();
         */
-/*
+       this.house_side_mat.apply();
+
         this.pushMatrix();
         this.bird.display(this);
-        this.popMatrix();*/
-
-        this.cyl.display();
+        this.popMatrix();
+        //this.cyl.display();
         // ---- END Primitive drawing section
     }
 }
