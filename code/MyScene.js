@@ -29,8 +29,6 @@ class MyScene extends CGFscene {
         this.skybox = new MyCubeMap(this);
         this.bird = new MyBird(this);
 
-        this.cyl = new MyTopCylinder(this, 5);
-
         //Objects connected to MyInterface
     }
     initLights() {
@@ -97,6 +95,9 @@ class MyScene extends CGFscene {
     }
     update(t){
         this.checkKeys();
+        this.bird.body_pos[0] += this.bird.speed * Math.sin(this.bird.body_rot[1]);
+        this.bird.body_pos[2] += this.bird.speed * Math.cos(this.bird.body_rot[1]);
+
     }
 
     display() {
@@ -141,16 +142,10 @@ class MyScene extends CGFscene {
     checkKeys() {
         var text = "Keys pressed: ";
         var keysPressed = false;
+
         // Check for key codes e.g. in ​https://keycode.info/
-        if (this.gui.isKeyPressed("KeyW")) {
-            text += " W ";
-            keysPressed = true;
-        }
-        if (this.gui.isKeyPressed("KeyS")) {
-            text += " S ";
-            keysPressed = true;
-        }
-        if (keysPressed)
-            console.log(text);
+        if (this.gui.isKeyPressed("KeyW")) this.bird.accelerate(1);
+        if (this.gui.isKeyPressed("KeyS")) this.bird.accelerate(-1);
+        if (this.gui.isKeyPressed("KeyR")) this.bird.reset();
     }
 }
