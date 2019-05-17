@@ -35,16 +35,8 @@ class MyCylinder extends CGFobject {
             this.indices.push((o), (o + 1), (o + 2));
             o += 2;
             
-            if(i%3 == 0){
-                this.texCoords.push(0, 0);
-                this.texCoords.push(0, 1);
-            }else if (i%3 == 1){
-                this.texCoords.push(0.5, 0);
-                this.texCoords.push(0.5, 1);
-            }else{
-                this.texCoords.push(1, 0);
-                this.texCoords.push(1, 1);
-            }
+            this.texCoords.push(sa, 0);
+            this.texCoords.push(sa, 1);
 
             ang+=alphaAng;
         }
@@ -61,16 +53,8 @@ class MyCylinder extends CGFobject {
 		this.indices.push((o-1), 0, o);
         this.indices.push(o, 0, 1);
         
-        if((this.slices - 1)%3 == 2){
-            this.texCoords.push(0, 0);
-            this.texCoords.push(0, 1);
-        }else if ((this.slices - 1)%3 == 0){
-            this.texCoords.push(0.5, 0);
-            this.texCoords.push(0.5, 1);
-        }else{
-            this.texCoords.push(1, 0);
-            this.texCoords.push(1, 1);
-        }
+        this.texCoords.push(sa, 0);
+        this.texCoords.push(sa, 1);
         
         // TOPS
         ang = 0;
@@ -83,7 +67,13 @@ class MyCylinder extends CGFobject {
             this.vertices.push(ca, 1, -sa);
             
             this.normals.push(0, -1, 0);
-            this.normals.push(0,  1, 0);
+            this.normals.push(0, 1, 0);
+            
+            sa = sa / 2.0;
+            ca = ca / 2.0;
+            
+            this.texCoords.push(ca+0.5, sa+0.5);
+            this.texCoords.push(ca+0.5, sa+0.5);
             
             ang+=alphaAng;
         }
@@ -94,7 +84,13 @@ class MyCylinder extends CGFobject {
         this.vertices.push(ca, 1, -sa);
 		
         this.normals.push(0, -1, 0);
-        this.normals.push(0,  1, 0);
+        this.normals.push(0, 1, 0);
+        
+        sa = sa / 2.0;
+        ca = ca / 2.0;
+
+        this.texCoords.push(ca+0.5, sa+0.5);
+        this.texCoords.push(ca+0.5, sa+0.5);
 
         if(this.slices > 2){
             var lower = 3;
