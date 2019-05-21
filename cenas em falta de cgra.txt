@@ -1,0 +1,4 @@
+1.Arranjar texturas para o pássaro
+2.Movimento das asas do pássaro
+3.Movimento oscilatório
+4.Terreno

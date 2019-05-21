@@ -37,6 +37,7 @@ class MyScene extends CGFscene {
         //Objects connected to MyInterface
         this.scaleFactor = 0.5;
         this.speedFactor = 0.5;
+
     }
     initLights() {
         this.lights[0].setPosition(15, 2, 5, 1);
@@ -145,24 +146,24 @@ class MyScene extends CGFscene {
         this.setDefaultAppearance();
 
         // ---- BEGIN Primitive drawing section
-        /*this.setActiveShader(this.testShaders[0]);
+        this.setActiveShader(this.testShaders[0]);
         this.pushMatrix();
         this.rotate(-0.5*Math.PI, 1, 0, 0);
         this.scale(60, 60, 1);
         this.terrain.display();
-        this.popMatrix();*/
+        this.popMatrix();
         
         /*
         this.house.display();
         this.skybox_day_mat.apply();
         this.skybox.display();
         */
-       this.house_side_mat.apply();
+       /*this.house_side_mat.apply();
 
         this.pushMatrix();
         this.scale(this.scaleFactor, this.scaleFactor, this.scaleFactor);
         this.bird.display(this);
-        this.popMatrix();
+        this.popMatrix();*/
 
         // ---- END Primitive drawing section
     }
