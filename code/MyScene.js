@@ -11,6 +11,7 @@ class MyScene extends CGFscene {
         this.initCameras();
         this.initLights();
         this.initMaterials();
+        this.initShaders();
 
         //Background color
         this.gl.clearColor(0.0, 0.0, 0.0, 1.0);
@@ -24,7 +25,8 @@ class MyScene extends CGFscene {
 
         //Initialize scene objects
         this.axis = new CGFaxis(this);
-        this.plane = new Plane(this, 32);
+        //this.plane = new Plane(this, 32);
+        this.terrain = new MyTerrain(this, this.terrain_mat);
         this.house = new MyHouse(this, 0, this.house_side_mat, this.house_roof_mat, this.house_column_mat);
         this.skybox = new MyCubeMap(this);
         this.bird = new MyBird(this);
@@ -52,6 +54,7 @@ class MyScene extends CGFscene {
         this.house_side_text    = new CGFtexture(this, 'images/house_side.png');
         this.house_roof_text    = new CGFtexture(this, 'images/palha.jpg');
         this.house_column_text  = new CGFtexture(this, 'images/wood.jpeg');
+        this.terrain_text       = new CGFtexture(this, 'images/terrain.jpg');
 
         //Materials
         this.skybox_day_mat = new CGFappearance(this)
@@ -91,6 +94,20 @@ class MyScene extends CGFscene {
         this.house_column_mat.setShininess(10.0);
         this.house_column_mat.setTexture(this.house_column_text);
         this.house_column_mat.setTextureWrap('REPEAT', 'REPEAT');
+
+        this.terrain_mat = new CGFappearance(this);
+        this.terrain_mat.setAmbient(1, 1, 1, 1);
+        this.terrain_mat.setDiffuse(1, 1, 1, 1);
+        this.terrain_mat.setSpecular(1, 1, 1, 0);
+        this.terrain_mat.setShininess(10.0);
+        this.terrain_mat.setTexture(this.terrain_text);
+        this.terrain_mat.setTextureWrap('REPEAT', 'REPEAT');
+
+    }
+    initShaders() {
+        this.testShaders = [
+			new CGFshader(this.gl, "shaders/terrain.vert", "shaders/terrain.frag"),
+        ];
     }
     setDefaultAppearance() {
         this.setAmbient(0.2, 0.4, 0.8, 1.0);
@@ -128,14 +145,13 @@ class MyScene extends CGFscene {
         this.setDefaultAppearance();
 
         // ---- BEGIN Primitive drawing section
-        /*
+        /*this.setActiveShader(this.testShaders[0]);
         this.pushMatrix();
         this.rotate(-0.5*Math.PI, 1, 0, 0);
         this.scale(60, 60, 1);
-        this.plane.display();
-        this.popMatrix();
-        */
-
+        this.terrain.display();
+        this.popMatrix();*/
+        
         /*
         this.house.display();
         this.skybox_day_mat.apply();
