@@ -8,7 +8,7 @@ class MyBird extends CGFobject {
         this.body = new MyTopCylinder(scene, 5);
         this.head = new MyTopCylinder(scene, 5);
         
-        this.bico = new MyCone(scene, 3);
+        this.bico = new MyCone(scene, 4);
         this.tail = new MyTriangle(scene);
         this.olho = new MyUnitCubeQuad(scene, scene.house_side_mat, scene.house_side_mat, scene.house_side_mat);
         
