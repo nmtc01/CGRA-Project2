@@ -102,7 +102,9 @@ class MyScene extends CGFscene {
         this.checkKeys();
         this.bird.body_pos[0] += ((t - this.time) / 50) * this.bird.speed * Math.sin(this.bird.body_rot[1]);
         this.bird.body_pos[2] += ((t - this.time) / 50) * this.bird.speed * Math.cos(this.bird.body_rot[1]);
-        this.bird.oscilate(((t - this.time) / 50));
+        this.bird.update(((t - this.time) / 50));
+        this.bird.oscilate();
+        this.bird.wing_flap();
 
         this.time = t;
     }
@@ -120,7 +122,7 @@ class MyScene extends CGFscene {
         this.applyViewMatrix();
 
         // Draw axis
-        this.axis.display();
+        //this.axis.display();
 
         //Apply default appearance
         this.setDefaultAppearance();

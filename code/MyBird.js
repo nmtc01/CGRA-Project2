@@ -15,7 +15,7 @@ class MyBird extends CGFobject {
         this.asa1 = new MyQuad(scene, undefined);
         this.asa2 = new MyTriangle(scene);
 
-        this.wing_rot = [-Math.PI / 4, Math.PI/4];      // arm - forearm
+        this.wing_rot = [0, 0];                         // arm - forearm
         this.body_rot = [0, 0, 0];                      // pitch - yaw - roll
         this.body_pos = [0, 0, 0];                      // x - y - z
         this.speed = 0;
@@ -73,8 +73,8 @@ class MyBird extends CGFobject {
         scene.pushMatrix();
         scene.rotate(Math.PI/2, 1, 0, 0);
         scene.translate(1.25, 0.5, 0);
-        //scene.rotate(this.wing_rot[0], 0, -1, 0);
-        //scene.translate( -0.1, 0, -0.1);
+        scene.translate(-0.1 * Math.sin(this.wing_rot[0]), 0, Math.sin(this.wing_rot[0]));
+        scene.rotate(this.wing_rot[0], 0, -1, 0);
         this.asa1.display();
         scene.popMatrix();
         
@@ -82,7 +82,8 @@ class MyBird extends CGFobject {
         scene.scale(0.5,0.5,0.5);
         scene.rotate(Math.PI/2, 1, 0, 0);
         scene.translate(4.5, 1, 0);
-        //scene.rotate(this.wing_rot[1], 0, -1, 0);
+        scene.translate(-Math.abs(Math.sin(this.wing_rot[1])), 0, -2*Math.sin(this.wing_rot[1]));
+        scene.rotate(this.wing_rot[1], 0, -1, 0);
         this.asa2.display();
         scene.popMatrix();
         
@@ -90,7 +91,8 @@ class MyBird extends CGFobject {
         scene.pushMatrix();
         scene.rotate(Math.PI/2, 1, 0, 0);
         scene.translate(-1.25, 0.5, 0);
-        //scene.rotate(this.wing_rot[0], 0, 1, 0);
+        scene.translate(0.1 * Math.sin(this.wing_rot[0]), 0, Math.sin(this.wing_rot[0]));
+        scene.rotate(this.wing_rot[0], 0, 1, 0);
         this.asa1.display();
         scene.popMatrix();
         
@@ -99,7 +101,8 @@ class MyBird extends CGFobject {
         scene.rotate(Math.PI, 0, 1, 0);
         scene.rotate(Math.PI/2, -1, 0, 0);
         scene.translate(4.5, 1, 0);
-        //scene.rotate(this.wing_rot[1], 0, 1, 0);
+        scene.translate(-Math.abs(Math.sin(this.wing_rot[1])), 0, 2*Math.sin(this.wing_rot[1]));
+        scene.rotate(this.wing_rot[1], 0, 1, 0);
         this.asa2.display();
         scene.popMatrix();
         
@@ -123,9 +126,17 @@ class MyBird extends CGFobject {
         this.speed = 0;
     }
 
-    oscilate(t) {
-        this.time += (0.1 * t * Math.PI);
+    update(t) {
+        this.time += (0.1 * t * Math.PI);        
+    }
+
+    oscilate() {
         this.body_pos[1] = Math.sin(this.time);
+    }
+
+    wing_flap() {
+        this.wing_rot[0] = this.speed * (Math.PI / 4) * Math.sin(this.time);
+        this.wing_rot[1] = -1 * this.speed * (Math.PI / 4) * Math.sin(this.time); 
     }
 }
 
