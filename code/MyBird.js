@@ -19,6 +19,7 @@ class MyBird extends CGFobject {
         this.body_rot = [0, 0, 0];                      // pitch - yaw - roll
         this.body_pos = [0, 0, 0];                      // x - y - z
         this.speed = 0;
+        this.time = 0;
     }
 
     display(scene){
@@ -120,6 +121,11 @@ class MyBird extends CGFobject {
         this.body_rot = [0, 0, 0];
         this.body_pos = [0, 0, 0];
         this.speed = 0;
+    }
+
+    oscilate(t) {
+        this.time += (0.1 * t * Math.PI);
+        this.body_pos[1] = Math.sin(this.time);
     }
 }
 

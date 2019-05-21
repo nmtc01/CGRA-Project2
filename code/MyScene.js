@@ -29,6 +29,9 @@ class MyScene extends CGFscene {
         this.skybox = new MyCubeMap(this);
         this.bird = new MyBird(this);
 
+        this.time = 0;
+        this.cur_time = 0;
+
         //Objects connected to MyInterface
         this.scaleFactor = 0.5;
         this.speedFactor = 0.5;
@@ -95,11 +98,13 @@ class MyScene extends CGFscene {
         this.setSpecular(0.2, 0.4, 0.8, 1.0);
         this.setShininess(10.0);
     }
-    update(t){
+    update(t) {
         this.checkKeys();
-        this.bird.body_pos[0] += this.bird.speed * Math.sin(this.bird.body_rot[1]);
-        this.bird.body_pos[2] += this.bird.speed * Math.cos(this.bird.body_rot[1]);
+        this.bird.body_pos[0] += ((t - this.time) / 50) * this.bird.speed * Math.sin(this.bird.body_rot[1]);
+        this.bird.body_pos[2] += ((t - this.time) / 50) * this.bird.speed * Math.cos(this.bird.body_rot[1]);
+        this.bird.oscilate(((t - this.time) / 50));
 
+        this.time = t;
     }
 
     display() {
@@ -143,12 +148,9 @@ class MyScene extends CGFscene {
         // ---- END Primitive drawing section
     }
     checkKeys() {
-        var text = "Keys pressed: ";
-        var keysPressed = false;
-
         // Check for key codes e.g. in ​https://keycode.info/
         if (this.gui.isKeyPressed("KeyW")) this.bird.accelerate(this.speedFactor);
-        if (this.gui.isKeyPressed("KeyS")) this.bird.accelerate(this.speedFactor);
+        if (this.gui.isKeyPressed("KeyS")) this.bird.accelerate(-this.speedFactor);
         if (this.gui.isKeyPressed("KeyR")) this.bird.reset();
         if (this.gui.isKeyPressed("KeyA")) this.bird.turn(0.1);
         if (this.gui.isKeyPressed("KeyD")) this.bird.turn(-0.1);
