@@ -145,6 +145,7 @@ class MyScene extends CGFscene {
         this.scale(this.scaleFactor, this.scaleFactor, this.scaleFactor);
         this.bird.display(this);
         this.popMatrix();
+
         // ---- END Primitive drawing section
     }
     checkKeys() {
