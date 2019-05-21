@@ -1,4 +1,43 @@
-1.Arranjar texturas para o pássaro
-2.Movimento das asas do pássaro
-3.Movimento oscilatório
-4.Terreno
+#Elementos necessarios: 
+- MyCubeMap
+- MyHouse (maximo 3 unidades de lado)
+- MyBird
+- MyTerrain
+- MyTreeBranch
+- MyNest
+- MyLightning
+
+
+#MyBird:
+- movimento oscilatorio         [X]
+- bater de asas                 [X]
+- movimento x,z                 [X]
+- texturas                      [ ]
+
+#MyTerrain:
+- textura                       [X]
+- altura                        [ ]
+- zona plana                    [ ]
+- gradiente                     [ ]
+
+#MyTreeBranch:
+- forma                         [X]
+- textura                       [ ]
+
+#MyNest:
+- forma                         [X]
+- texturas                      [ ]
+
+#MyLightning:
+- importar MyLSystem            [ ]
+- pressionar 'L' para gerar     [ ]
+
+
+
+#Funcionalidades:
+- pressionar 'P' para baixar    [ ]
+- ave apanha o MyTreeBranch     [ ]
+- ave transporta MyTreeBranch   [ ]
+- ave larga MyTreeBranch        [ ]
+
+
