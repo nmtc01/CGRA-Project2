@@ -30,6 +30,7 @@ class MyScene extends CGFscene {
         this.house = new MyHouse(this, 0, this.house_side_mat, this.house_roof_mat, this.house_column_mat);
         this.skybox = new MyCubeMap(this);
         this.bird = new MyBird(this);
+        this.nest = new MyNest(this);
 
         this.time = 0;
         this.cur_time = 0;
@@ -140,7 +141,7 @@ class MyScene extends CGFscene {
         this.applyViewMatrix();
 
         // Draw axis
-        //this.axis.display();
+        this.axis.display();
 
         //Apply default appearance
         this.setDefaultAppearance();
@@ -158,12 +159,18 @@ class MyScene extends CGFscene {
         this.skybox_day_mat.apply();
         this.skybox.display();
         */
-       /*this.house_side_mat.apply();
-
+       this.house_side_mat.apply();
+        
+       /*
         this.pushMatrix();
         this.scale(this.scaleFactor, this.scaleFactor, this.scaleFactor);
         this.bird.display(this);
         this.popMatrix();*/
+
+
+    /*NEST*/
+        this.nest.display(this);
+        
 
         // ---- END Primitive drawing section
     }
