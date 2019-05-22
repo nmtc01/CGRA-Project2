@@ -14,11 +14,11 @@ varying vec2 vTextureCoord;
 void main() {
 	vec3 offset=vec3(0.0,0.0,0.0);
 
-	vec4 filter=texture2D(uSampler2,vec2(0.0,0.1)+vec2(mod(aTextureCoord.x, 1.0), mod(aTextureCoord.y, 1.0)));
+	vec4 filter=texture2D(uSampler2,aTextureCoord);
 
 	vTextureCoord = aTextureCoord;
 
-	offset=aVertexNormal*filter.b;
+	offset=aVertexNormal*0.3*filter.b;
 
 	gl_Position = uPMatrix * uMVMatrix * vec4(aVertexPosition+offset, 1.0);
 }

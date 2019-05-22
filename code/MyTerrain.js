@@ -4,14 +4,36 @@
  * @param scene - Reference to MyScene object
  */
 class MyTerrain extends CGFobject {
-	constructor(scene, terrain_mat) {
+	constructor(scene) {
         super(scene);
-        
-        this.terrain_mat = terrain_mat;
+
         this.plane = new Plane(scene, 32);
+
+        this.initMaterials();
+        this.initShaders();
+    }
+    initMaterials() {
+        //Textures
+        this.terrain_text = new CGFtexture(this.scene, 'images/terrain.jpg');
+        this.height_text = new CGFtexture(this.scene, 'images/heightmap.jpg');
+
+        //Materials
+        this.terrain_mat = new CGFappearance(this.scene);
+        this.terrain_mat.setAmbient(1, 1, 1, 1);
+        this.terrain_mat.setDiffuse(1, 1, 1, 1);
+        this.terrain_mat.setSpecular(1, 1, 1, 0);
+        this.terrain_mat.setShininess(10.0);
+        this.terrain_mat.setTexture(this.terrain_text);
+        this.terrain_mat.setTextureWrap('REPEAT', 'REPEAT');
+    }
+    initShaders() {
+        this.terrain_shader = new CGFshader(this.scene.gl, "shaders/terrain.vert", "shaders/terrain.frag");
+        this.terrain_shader.setUniformsValues({uSampler2:1});
     }
 
     display() {
+        this.scene.setActiveShader(this.terrain_shader);
+        this.height_text.bind(1);
         this.terrain_mat.apply();
         this.plane.display();
     }
