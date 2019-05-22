@@ -5,12 +5,14 @@
 class MyBird extends CGFobject {
     constructor(scene) {
         super(scene);
+        this.initMaterials();
+
         this.body = new MyTopCylinder(scene, 5);
         this.head = new MyTopCylinder(scene, 5);
         
         this.bico = new MyCone(scene, 4);
         this.tail = new MyTriangle(scene);
-        this.olho = new MyUnitCubeQuad(scene, scene.house_side_mat, scene.house_side_mat, scene.house_side_mat);
+        this.olho = new MyUnitCubeQuad(scene, this.bird_body_mat, this.bird_eye_mat, this.bird_body_mat);
         
         this.asa1 = new MyQuad(scene, undefined);
         this.asa2 = new MyTriangle(scene);
@@ -20,13 +22,12 @@ class MyBird extends CGFobject {
         this.body_pos = [0, 0, 0];                      // x - y - z
         this.speed = 0;
         this.time = 0;
-
-        this.initMaterials();
     }
 
     initMaterials() {
         //Textures
         this.bird_body_text = new CGFtexture(this.scene, 'images/penas.jpg');
+        this.bird_eye_text = new CGFtexture(this.scene, 'images/eye.png');
 
         //Materials
         this.bird_body_mat = new CGFappearance(this.scene);
@@ -36,6 +37,22 @@ class MyBird extends CGFobject {
         this.bird_body_mat.setShininess(10.0);
         this.bird_body_mat.setTexture(this.bird_body_text);
         this.bird_body_mat.setTextureWrap('REPEAT', 'REPEAT');
+
+        this.bird_bico_mat = new CGFappearance(this.scene);
+        this.bird_bico_mat.setAmbient(1, 0.2, 0, 1);
+        this.bird_bico_mat.setDiffuse(1, 0.2, 0, 0.1);
+        this.bird_bico_mat.setSpecular(0.1, 0.1, 0.1, 0.11);
+        this.bird_bico_mat.setShininess(10.0);
+        this.bird_bico_mat.setTexture(this.bird_body_text);
+        this.bird_bico_mat.setTextureWrap('REPEAT', 'REPEAT');
+
+        this.bird_eye_mat = new CGFappearance(this.scene);
+        this.bird_eye_mat.setAmbient(1, 1, 1, 1);
+        this.bird_eye_mat.setDiffuse(1, 1, 1, 0.1);
+        this.bird_eye_mat.setSpecular(0.1, 0.1, 0.1, 0.11);
+        this.bird_eye_mat.setShininess(10.0);
+        this.bird_eye_mat.setTexture(this.bird_eye_text);
+        this.bird_eye_mat.setTextureWrap('REPEAT', 'REPEAT');
     }
 
     display(scene){
@@ -61,10 +78,11 @@ class MyBird extends CGFobject {
         scene.popMatrix();
         
         scene.pushMatrix();
-        scene.scale(0.5,0.5,0.5);
+        scene.scale(0.4,0.3,0.5);
         scene.rotate(Math.PI/2, 0, 1, 0);
         scene.rotate(Math.PI/2, 0, 0, 1);
         scene.translate(0.5, 3.5, 0);
+        this.bird_bico_mat.apply();
         this.bico.display();
         scene.popMatrix();
         
@@ -79,12 +97,14 @@ class MyBird extends CGFobject {
         scene.pushMatrix();
         scene.scale(0.2,0.2,0.2);
         scene.translate(5, 4, 7.5);
+        scene.rotate(Math.PI/2,0,0,1);
         this.olho.display();
         scene.popMatrix();
         
         scene.pushMatrix();
         scene.scale(0.2,0.2,0.2);
         scene.translate(-5, 4, 7.5);
+        scene.rotate(-Math.PI/2,0,0,1);
         this.olho.display();
         scene.popMatrix();
         
