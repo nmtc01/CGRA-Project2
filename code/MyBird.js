@@ -20,6 +20,22 @@ class MyBird extends CGFobject {
         this.body_pos = [0, 0, 0];                      // x - y - z
         this.speed = 0;
         this.time = 0;
+
+        this.initMaterials();
+    }
+
+    initMaterials() {
+        //Textures
+        this.bird_body_text = new CGFtexture(this.scene, 'images/penas.jpg');
+
+        //Materials
+        this.bird_body_mat = new CGFappearance(this.scene);
+        this.bird_body_mat.setAmbient(1, 1, 1, 1);
+        this.bird_body_mat.setDiffuse(1, 1, 1, 0.1);
+        this.bird_body_mat.setSpecular(0.1, 0.1, 0.1, 0.11);
+        this.bird_body_mat.setShininess(10.0);
+        this.bird_body_mat.setTexture(this.bird_body_text);
+        this.bird_body_mat.setTextureWrap('REPEAT', 'REPEAT');
     }
 
     display(scene){
@@ -31,6 +47,7 @@ class MyBird extends CGFobject {
         scene.pushMatrix();
         scene.rotate(Math.PI/2, 0, 1, 0);
         scene.rotate(Math.PI/2, 0, 0, 1);
+        this.bird_body_mat.apply();
         this.body.display();
         scene.popMatrix();
 
@@ -39,6 +56,7 @@ class MyBird extends CGFobject {
         scene.rotate(Math.PI/2, 0, 1, 0);
         scene.rotate(Math.PI/2, 0, 0, 1);
         scene.translate(0.5, 0.5, 0);
+        this.bird_body_mat.apply();
         this.head.display();
         scene.popMatrix();
         
@@ -46,7 +64,7 @@ class MyBird extends CGFobject {
         scene.scale(0.5,0.5,0.5);
         scene.rotate(Math.PI/2, 0, 1, 0);
         scene.rotate(Math.PI/2, 0, 0, 1);
-        scene.translate(0, 3.5, 0);
+        scene.translate(0.5, 3.5, 0);
         this.bico.display();
         scene.popMatrix();
         
@@ -54,6 +72,7 @@ class MyBird extends CGFobject {
         scene.rotate(Math.PI/2, 0, 1, 0);
         scene.scale(0.4,0.4,0.4);
         scene.translate(1, -0.5, 0);
+        this.bird_body_mat.apply();
         this.tail.display();
         scene.popMatrix();
         
@@ -75,6 +94,7 @@ class MyBird extends CGFobject {
         scene.translate(1.25, 0.5, 0);
         scene.translate(-0.1 * Math.sin(this.wing_rot[0]), 0, Math.sin(this.wing_rot[0]));
         scene.rotate(this.wing_rot[0], 0, -1, 0);
+        this.bird_body_mat.apply();
         this.asa1.display();
         scene.popMatrix();
         
@@ -84,6 +104,7 @@ class MyBird extends CGFobject {
         scene.translate(4.5, 1, 0);
         scene.translate(-Math.abs(Math.sin(this.wing_rot[1])), 0, -2*Math.sin(this.wing_rot[1]));
         scene.rotate(this.wing_rot[1], 0, -1, 0);
+        this.bird_body_mat.apply();
         this.asa2.display();
         scene.popMatrix();
         
@@ -93,6 +114,7 @@ class MyBird extends CGFobject {
         scene.translate(-1.25, 0.5, 0);
         scene.translate(0.1 * Math.sin(this.wing_rot[0]), 0, Math.sin(this.wing_rot[0]));
         scene.rotate(this.wing_rot[0], 0, 1, 0);
+        this.bird_body_mat.apply();
         this.asa1.display();
         scene.popMatrix();
         
@@ -103,6 +125,7 @@ class MyBird extends CGFobject {
         scene.translate(4.5, 1, 0);
         scene.translate(-Math.abs(Math.sin(this.wing_rot[1])), 0, 2*Math.sin(this.wing_rot[1]));
         scene.rotate(this.wing_rot[1], 0, 1, 0);
+        this.bird_body_mat.apply();
         this.asa2.display();
         scene.popMatrix();
         
