@@ -23,12 +23,14 @@ class MyScene extends CGFscene {
         this.setUpdatePeriod(50);
 
         //Initialize scene objects
-        this.axis = new CGFaxis(this);
-        this.terrain = new MyTerrain(this);
-        this.house = new MyHouse(this, 0, this.house_side_mat, this.house_roof_mat, this.house_column_mat);
-        this.skybox = new MyCubeMap(this);
-        this.bird = new MyBird(this);
-        this.nest = new MyNest(this);
+        this.axis       = new CGFaxis(this);
+        this.terrain    = new MyTerrain(this);
+        this.house      = new MyHouse(this, 0, this.house_side_mat, this.house_roof_mat, this.house_column_mat);
+        this.skybox     = new MyCubeMap(this);
+        this.bird       = new MyBird(this);
+        this.nest       = new MyNest(this);
+        this.lightning  = new MyLightning(this);
+        this.lightning.generate(this.lightning.axiom, this.lightning.productions, this.lightning.angle, this.lightning.iterations, this.lightning.scaleFactor);
 
         this.time = 0;
         this.cur_time = 0;
@@ -45,7 +47,7 @@ class MyScene extends CGFscene {
         this.lights[0].update();
     }
     initCameras() {
-        this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(10, 10, 10), vec3.fromValues(0, 0, 0));
+        this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(50, 50, 50), vec3.fromValues(0, 0, 0));
     }
     initMaterials() {
         //Textures
@@ -124,27 +126,29 @@ class MyScene extends CGFscene {
         this.applyViewMatrix();
 
         // Draw axis
-        this.axis.display();
+        //this.axis.display();
 
         //Apply default appearance
         this.setDefaultAppearance();
 
         // ---- BEGIN Primitive drawing section
-        this.pushMatrix();
+        /*this.pushMatrix();
         this.rotate(-0.5*Math.PI, 1, 0, 0);
-        this.scale(60, 60, 60);
+        this.scale(60, 60, 10);
         this.terrain.display();
-        this.popMatrix();
+        this.popMatrix();*/
         
         
-        /*this.house.display();
-        this.skybox_day_mat.apply();
+        //this.house.display();
+        /*this.skybox_day_mat.apply();
         this.skybox.display();*/
 
         /*this.pushMatrix();
         this.scale(this.scaleFactor, this.scaleFactor, this.scaleFactor);
         this.bird.display(this);
         this.popMatrix();*/
+
+        this.lightning.display();
 
 
     /*NEST*/
