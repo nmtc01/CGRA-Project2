@@ -43,7 +43,7 @@ class MyBird extends CGFobject {
         this.bird_bico_mat.setDiffuse(1, 0.2, 0, 0.1);
         this.bird_bico_mat.setSpecular(0.1, 0.1, 0.1, 0.11);
         this.bird_bico_mat.setShininess(10.0);
-        this.bird_bico_mat.setTexture(this.bird_body_text);
+        //this.bird_bico_mat.setTexture(this.bird_body_text);
         this.bird_bico_mat.setTextureWrap('REPEAT', 'REPEAT');
 
         this.bird_eye_mat = new CGFappearance(this.scene);

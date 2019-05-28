@@ -29,6 +29,12 @@ class MyScene extends CGFscene {
         this.skybox     = new MyCubeMap(this);
         this.bird       = new MyBird(this);
         this.nest       = new MyNest(this);
+        this.branches = [];
+        this.branches[0] = new MyTreeBranch(this, 0, 4.1, 0, Math.PI, Math.PI/2);
+        this.branches[1] = new MyTreeBranch(this);
+        this.branches[2] = new MyTreeBranch(this);
+        this.branches[3] = new MyTreeBranch(this);
+        this.branches[4] = new MyTreeBranch(this);
         this.lightning  = new MyLightning(this);
         this.lightning.generate(this.lightning.axiom, this.lightning.productions, this.lightning.angle, this.lightning.iterations, this.lightning.scaleFactor);
 
@@ -103,7 +109,8 @@ let skybox      = 1,
     nest        = 0, 
     lightning   = 1, 
     trees       = 0, 
-    terrain     = 1;
+    terrain     = 1,
+    branches    = 1;
 //SCENE
 //SKYBOX
         if(skybox){
@@ -116,39 +123,29 @@ let skybox      = 1,
 //HOUSE
         if(house){
         this.pushMatrix();
+        this.translate(2,4,6);
         this.house.display();
         this.popMatrix();
         }
 
-//BIRD  
+//BIRD
         if(bird){
         this.pushMatrix();
         this.scale(this.scaleFactor, this.scaleFactor, this.scaleFactor);
+        this.translate(16,10,3);
         this.bird.display(this);
         this.popMatrix();
         }
 
 //NEST
-        if(nest){
+        if (nest) {
         this.pushMatrix();
+        this.translate(8,4,2);
+        this.house_side_mat.apply();
         this.nest.display();
         this.popMatrix();
         }
-        
-//TREES
-        if(trees){
-            
-        }
-        
-//TERRAIN
-        if(terrain){
-        this.pushMatrix();
-        this.rotate(-0.5 * Math.PI, 1, 0, 0);
-        this.scale(60, 60, 45);
-        this.terrain.display();
-        this.popMatrix();
-        }
-        
+
 //LIGHTNING
         if(lightning){
         this.pushMatrix();
@@ -156,6 +153,26 @@ let skybox      = 1,
         this.rotate(Math.PI/4, 1,0,1);
         this.scale(4,-4,4);
         this.lightning.display();
+        this.popMatrix();
+        }
+
+//TREES
+        if(trees){
+        }
+
+//TERRAIN
+        if(terrain){
+            this.pushMatrix();
+            this.rotate(-0.5 * Math.PI, 1, 0, 0);
+            this.scale(60, 60, 45);
+            this.terrain.display();
+            this.popMatrix();
+        }
+        
+//BRANCHES
+        if(branches) {
+        this.pushMatrix();
+        this.branches[0].display();
         this.popMatrix();
         }
     }

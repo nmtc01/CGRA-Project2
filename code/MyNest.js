@@ -21,76 +21,76 @@ class MyNest extends CGFobject {
         else this.height = 1;
     }
 
-    display(scene) {
-        if (scene == undefined) return;
-        scene.pushMatrix();
+    display() {
+        if (this.scene == undefined) return;
+        this.scene.pushMatrix();
 
-        scene.translate(this.pos[0], this.pos[1], this.pos[2]);
-        scene.scale(this.radius, this.height, this.radius);
-        scene.rotate(this.rot[0], 1, 0, 0);
-        scene.rotate(this.rot[1], 0, 0, 1);
+        this.scene.translate(this.pos[0], this.pos[1], this.pos[2]);
+        this.scene.scale(this.radius, this.height, this.radius);
+        this.scene.rotate(this.rot[0], 1, 0, 0);
+        this.scene.rotate(this.rot[1], 0, 0, 1);
 
-        scene.pushMatrix();
-        scene.translate(-1.2, 0, -0.5);
-        scene.rotate(Math.PI/2, 1, 0, 0);
-        this.branch.display(scene);
-        scene.popMatrix();
+        this.scene.pushMatrix();
+        this.scene.translate(-1.2, 0, -0.5);
+        this.scene.rotate(Math.PI/2, 1, 0, 0);
+        this.branch.display(this.scene);
+        this.scene.popMatrix();
         
-        scene.pushMatrix();
-        scene.translate(1.2, 0, -0.5);
-        scene.rotate(Math.PI/2, 1, 0, 0);
-        this.branch.display(scene);
-        scene.popMatrix();
+        this.scene.pushMatrix();
+        this.scene.translate(1.2, 0, -0.5);
+        this.scene.rotate(Math.PI/2, 1, 0, 0);
+        this.branch.display(this.scene);
+        this.scene.popMatrix();
         
-        scene.pushMatrix();
-        scene.translate(-0.5, 0, -1.2);
-        scene.rotate(Math.PI/2, 1, 0, 0);
-        scene.rotate(Math.PI/2, 0, 0, -1);
-        this.branch.display(scene);
-        scene.popMatrix();
+        this.scene.pushMatrix();
+        this.scene.translate(-0.5, 0, -1.2);
+        this.scene.rotate(Math.PI/2, 1, 0, 0);
+        this.scene.rotate(Math.PI/2, 0, 0, -1);
+        this.branch.display(this.scene);
+        this.scene.popMatrix();
         
-        scene.pushMatrix();
-        scene.translate(-0.5, 0, 1.2);
-        scene.rotate(Math.PI/2, 1, 0, 0);
-        scene.rotate(Math.PI/2, 0, 0, -1);
-        this.branch.display(scene);
-        scene.popMatrix();
+        this.scene.pushMatrix();
+        this.scene.translate(-0.5, 0, 1.2);
+        this.scene.rotate(Math.PI/2, 1, 0, 0);
+        this.scene.rotate(Math.PI/2, 0, 0, -1);
+        this.branch.display(this.scene);
+        this.scene.popMatrix();
         
-        scene.pushMatrix();
-        scene.translate(-1.2, 0, 0.5);
-        scene.rotate(Math.PI/2, 1, 0, 0);
-        scene.rotate(Math.PI/4, 0, 0, -1);
-        this.branch.display(scene);
-        scene.popMatrix();
+        this.scene.pushMatrix();
+        this.scene.translate(-1.2, 0, 0.5);
+        this.scene.rotate(Math.PI/2, 1, 0, 0);
+        this.scene.rotate(Math.PI/4, 0, 0, -1);
+        this.branch.display(this.scene);
+        this.scene.popMatrix();
         
-        scene.pushMatrix();
-        scene.translate(-1.2, 0, -0.5);
-        scene.rotate(Math.PI/2, 1, 0, 0);
-        scene.rotate(3 * Math.PI/4, 0, 0, -1);
-        this.branch.display(scene);
-        scene.popMatrix();
+        this.scene.pushMatrix();
+        this.scene.translate(-1.2, 0, -0.5);
+        this.scene.rotate(Math.PI/2, 1, 0, 0);
+        this.scene.rotate(3 * Math.PI/4, 0, 0, -1);
+        this.branch.display(this.scene);
+        this.scene.popMatrix();
         
-        scene.pushMatrix();
-        scene.translate(0.5, 0, 1.2);
-        scene.rotate(Math.PI/2, 1, 0, 0);
-        scene.rotate(3 * Math.PI/4, 0, 0, -1);
-        this.branch.display(scene);
-        scene.popMatrix();
+        this.scene.pushMatrix();
+        this.scene.translate(0.5, 0, 1.2);
+        this.scene.rotate(Math.PI/2, 1, 0, 0);
+        this.scene.rotate(3 * Math.PI/4, 0, 0, -1);
+        this.branch.display(this.scene);
+        this.scene.popMatrix();
         
-        scene.pushMatrix();
-        scene.translate(0.5, 0, -1.2);
-        scene.rotate(Math.PI/2, 1, 0, 0);
-        scene.rotate(Math.PI/4, 0, 0, -1);
-        this.branch.display(scene);
-        scene.popMatrix();
+        this.scene.pushMatrix();
+        this.scene.translate(0.5, 0, -1.2);
+        this.scene.rotate(Math.PI/2, 1, 0, 0);
+        this.scene.rotate(Math.PI/4, 0, 0, -1);
+        this.branch.display(this.scene);
+        this.scene.popMatrix();
 
-        scene.pushMatrix();
-        scene.rotate(Math.PI/8, 0, 1, 0);
-        scene.scale(1.3, 0.05, 1.3);
+        this.scene.pushMatrix();
+        this.scene.rotate(Math.PI/8, 0, 1, 0);
+        this.scene.scale(1.3, 0.05, 1.3);
         this.bot.display();
-        scene.popMatrix();
+        this.scene.popMatrix();
         
-        scene.popMatrix();
+        this.scene.popMatrix();
     }
 }
 

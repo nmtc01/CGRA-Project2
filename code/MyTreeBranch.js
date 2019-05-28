@@ -14,20 +14,20 @@ class MyTreeBranch extends CGFobject {
         else this.rot = [0, 0];
 
         if (radius != undefined) this.radius = radius;
-        else this.radius = 1;
+        else this.radius = 0.1;
 
         if (height != undefined) this.height = height;
-        else this.height = 1;
+        else this.height = 0.4;
     }
 
-    display(scene) {
-        scene.pushMatrix();
-        scene.translate(this.pos[0], this.pos[1], this.pos[2]);
-        scene.rotate(this.rot[0], 1, 0, 0);
-        scene.rotate(this.rot[1], 0, 0, 1);
-        scene.scale(this.radius, this.height, this.radius);
+    display() {
+        this.scene.pushMatrix();
+        this.scene.translate(this.pos[0], this.pos[1], this.pos[2]);
+        this.scene.rotate(this.rot[0], 1, 0, 0);
+        this.scene.rotate(this.rot[1], 0, 0, 1);
+        this.scene.scale(this.radius, this.height, this.radius);
         this.branch.display();
-        scene.popMatrix();
+        this.scene.popMatrix();
     }
 }
 
