@@ -23,13 +23,13 @@ class MyScene extends CGFscene {
         this.setUpdatePeriod(50);
 
         //Initialize scene objects
-        this.axis = new CGFaxis(this);
-        this.terrain = new MyTerrain(this);
-        this.house = new MyHouse(this, 0, this.house_side_mat, this.house_roof_mat, this.house_column_mat);
-        this.skybox = new MyCubeMap(this);
-        this.bird = new MyBird(this);
-        this.nest = new MyNest(this);
-        this.lightning = new MyLightning(this);
+        this.axis       = new CGFaxis(this);
+        this.terrain    = new MyTerrain(this);
+        this.house      = new MyHouse(this, 0, this.house_side_mat, this.house_roof_mat, this.house_column_mat);
+        this.skybox     = new MyCubeMap(this);
+        this.bird       = new MyBird(this);
+        this.nest       = new MyNest(this);
+        this.lightning  = new MyLightning(this);
         this.lightning.generate(this.lightning.axiom, this.lightning.productions, this.lightning.angle, this.lightning.iterations, this.lightning.scaleFactor);
 
         this.time = 0;
@@ -47,7 +47,7 @@ class MyScene extends CGFscene {
         this.lights[0].update();
     }
     initCameras() {
-        this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(50, 50, 50), vec3.fromValues(0, 0, 0));
+        this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(100, 50, 100), vec3.fromValues(-60, 0, -60));
     }
     initMaterials() {
 //TEXTURES
@@ -97,42 +97,67 @@ class MyScene extends CGFscene {
         this.applyViewMatrix();
         this.setDefaultAppearance();
 
+let skybox      = 1, 
+    house       = 0, 
+    bird        = 0, 
+    nest        = 0, 
+    lightning   = 1, 
+    trees       = 0, 
+    terrain     = 1;
 //SCENE
 //SKYBOX
+        if(skybox){
         this.pushMatrix();
         this.skybox_day_mat.apply();
         this.skybox.display();
         this.popMatrix();
+        }
 
 //HOUSE
+        if(house){
         this.pushMatrix();
         this.house.display();
         this.popMatrix();
+        }
 
-//BIRD
+//BIRD  
+        if(bird){
         this.pushMatrix();
         this.scale(this.scaleFactor, this.scaleFactor, this.scaleFactor);
         this.bird.display(this);
         this.popMatrix();
+        }
 
 //NEST
+        if(nest){
         this.pushMatrix();
         this.nest.display();
         this.popMatrix();
-
-//LIGHTNING
-        this.pushMatrix();
-        this.lightning.display();
-        this.popMatrix();
-
+        }
+        
 //TREES
-
+        if(trees){
+            
+        }
+        
 //TERRAIN
+        if(terrain){
         this.pushMatrix();
         this.rotate(-0.5 * Math.PI, 1, 0, 0);
         this.scale(60, 60, 45);
         this.terrain.display();
         this.popMatrix();
+        }
+        
+//LIGHTNING
+        if(lightning){
+        this.pushMatrix();
+        this.translate(-10,20,-10);
+        this.rotate(Math.PI/4, 1,0,1);
+        this.scale(4,-4,4);
+        this.lightning.display();
+        this.popMatrix();
+        }
     }
 
     checkKeys(t) {
