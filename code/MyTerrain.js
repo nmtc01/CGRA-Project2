@@ -39,5 +39,7 @@ class MyTerrain extends CGFobject {
         this.gradient_text.bind(2);
         this.terrain_mat.apply();
         this.plane.display();
+        this.gradient_text.unbind(1);
+        this.gradient_text.unbind(2);
     }
 }

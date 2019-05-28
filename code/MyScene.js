@@ -138,10 +138,10 @@ class MyScene extends CGFscene {
         this.terrain.display();
         this.popMatrix();
         
-        
+
         //this.house.display();
-        /*this.skybox_day_mat.apply();
-        this.skybox.display();*/
+        this.skybox_day_mat.apply();
+        this.skybox.display();
 
         /*this.pushMatrix();
         this.scale(this.scaleFactor, this.scaleFactor, this.scaleFactor);
