@@ -170,7 +170,9 @@ class MyBird extends CGFobject {
     }
 
     update(t) {
-        this.time += (0.1 * t * Math.PI);        
+        this.time += (0.1 * t * Math.PI);
+        this.body_pos[0] += t * this.speed * Math.sin(this.body_rot[1]);
+        this.body_pos[2] += t * this.speed * Math.cos(this.body_rot[1]);  
     }
 
     oscilate() {
@@ -178,8 +180,8 @@ class MyBird extends CGFobject {
     }
 
     wing_flap() {
-        this.wing_rot[0] = this.speed * (Math.PI / 4) * Math.sin(this.time);
-        this.wing_rot[1] = -1 * this.speed * (Math.PI / 4) * Math.sin(this.time); 
+        this.wing_rot[0] = -1 * Math.abs(this.speed * (Math.PI / 4) * Math.sin(this.time * 0.8));
+        this.wing_rot[1] = Math.abs(this.speed * (Math.PI / 4) * Math.sin(this.time * 0.8)); 
     }
 }
 

@@ -103,65 +103,65 @@ class MyScene extends CGFscene {
         this.setShininess(10.0);
     }
     update(t) {
-        this.checkKeys();
-        this.bird.body_pos[0] += ((t - this.time) / 50) * this.bird.speed * Math.sin(this.bird.body_rot[1]);
-        this.bird.body_pos[2] += ((t - this.time) / 50) * this.bird.speed * Math.cos(this.bird.body_rot[1]);
+        this.checkKeys(t);
+        
         this.bird.update(((t - this.time) / 50));
         this.bird.oscilate();
         this.bird.wing_flap();
+
+        this.lightning.update(t);
 
         this.time = t;
     }
 
     display() {
-        // ---- BEGIN Background, camera and axis setup
-        // Clear image and depth buffer everytime we update the scene
         this.gl.viewport(0, 0, this.gl.canvas.width, this.gl.canvas.height);
         this.gl.clear(this.gl.COLOR_BUFFER_BIT | this.gl.DEPTH_BUFFER_BIT);
         this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_MAG_FILTER, this.gl.NEAREST);
-        // Initialize Model-View matrix as identity (no transformation
         this.updateProjectionMatrix();
         this.loadIdentity();
-        // Apply transformations corresponding to the camera position relative to the origin
         this.applyViewMatrix();
-
-        // Draw axis
-        //this.axis.display();
-
-        //Apply default appearance
         this.setDefaultAppearance();
 
-        // ---- BEGIN Primitive drawing section
+//SCENE
+//TERRAIN
         this.pushMatrix();
         this.rotate(-0.5*Math.PI, 1, 0, 0);
         this.scale(60, 60, 45);
         this.terrain.display();
         this.popMatrix();
-        
 
-        //this.house.display();
+//SKYBOX
         this.skybox_day_mat.apply();
         this.skybox.display();
 
-        /*this.pushMatrix();
+//HOUSE
+        this.house.display();
+
+//BIRD
+        
+         
+
+        this.nest.display();
+ 
+        this.pushMatrix();
         this.scale(this.scaleFactor, this.scaleFactor, this.scaleFactor);
         this.bird.display(this);
-        this.popMatrix();*/
+        this.popMatrix();
+
         this.lightning.display();
 
 
-    /*NEST*/
-        //this.nest.display(this);
-        
-
-        // ---- END Primitive drawing section
+        //this.nest.display(this);    
     }
-    checkKeys() {
+
+    checkKeys(t) {
         // Check for key codes e.g. in ​https://keycode.info/
         if (this.gui.isKeyPressed("KeyW")) this.bird.accelerate(this.speedFactor);
         if (this.gui.isKeyPressed("KeyS")) this.bird.accelerate(-this.speedFactor);
         if (this.gui.isKeyPressed("KeyR")) this.bird.reset();
         if (this.gui.isKeyPressed("KeyA")) this.bird.turn(0.1);
         if (this.gui.isKeyPressed("KeyD")) this.bird.turn(-0.1);
+        if (this.gui.isKeyPressed("KeyL")) this.lightning.startAnimation(t);
     }
 }
