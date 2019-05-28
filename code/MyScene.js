@@ -23,7 +23,7 @@ class MyScene extends CGFscene {
 
 //OBJECTS
         this.axis       = new CGFaxis(this);
-        this.terrain    = new MyTerrain(this, 60, 60, 45);
+        this.terrain    = new MyTerrain(this, 60, 60, 30);
         this.house      = new MyHouse(this, 0, this.house_side_mat, this.house_roof_mat, this.house_column_mat);
         this.skybox     = new MyCubeMap(this);
         this.bird       = new MyBird(this);
@@ -52,7 +52,7 @@ class MyScene extends CGFscene {
         this.lights[0].update();
     }
     initCameras() {
-        this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(60, 80, 60), vec3.fromValues(-10,-10,-10));
+        this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(30, 20, 30), vec3.fromValues(0,0,0));
     }
     initMaterials() {
 //TEXTURES
@@ -61,6 +61,9 @@ class MyScene extends CGFscene {
         this.house_side_text    = new CGFtexture(this, 'images/house_side.png');
         this.house_roof_text    = new CGFtexture(this, 'images/palha.jpg');
         this.house_column_text  = new CGFtexture(this, 'images/wood.jpeg');
+        this.branch_text        = new CGFtexture(this, 'images/branch.png');
+        this.branch_top_text    = new CGFtexture(this, 'images/branch_top.png');
+        this.lightning_text    = new CGFtexture(this, 'images/lightning.png');
 
 //MATERIALS
         this.skybox_day_mat     = new CGFappearance(this);
@@ -68,12 +71,18 @@ class MyScene extends CGFscene {
         this.house_side_mat     = new CGFappearance(this);
         this.house_roof_mat     = new CGFappearance(this);
         this.house_column_mat   = new CGFappearance(this);
+        this.branch_mat         = new CGFappearance(this);
+        this.branch_top_mat     = new CGFappearance(this);
+        this.lightning_mat      = new CGFappearance(this);
         
         this.skybox_day_mat.setTexture(this.skybox_day_text);
         this.skybox_night_mat.setTexture(this.skybox_night_text);
         this.house_side_mat.setTexture(this.house_side_text);
         this.house_roof_mat.setTexture(this.house_roof_text);
         this.house_column_mat.setTexture(this.house_column_text);
+        this.branch_mat.setTexture(this.branch_text);
+        this.branch_top_mat.setTexture(this.branch_top_text);
+        this.lightning_mat.setTexture(this.lightning_text);
     }
     setDefaultAppearance() {
         this.setAmbient(0.2, 0.4, 0.8, 1.0);
@@ -103,13 +112,14 @@ class MyScene extends CGFscene {
         this.setDefaultAppearance();
 
 let skybox      = 1, 
-    house       = 0, 
-    bird        = 0, 
-    nest        = 0, 
+    house       = 1, 
+    bird        = 1, 
+    nest        = 1, 
     lightning   = 1, 
-    trees       = 0, 
+    trees       = 1, 
     terrain     = 1,
-    branches    = 0;
+    branches    = 1,
+    test        = 0;
 //SCENE
 //SKYBOX
         if(skybox){
@@ -122,7 +132,7 @@ let skybox      = 1,
 //HOUSE
         if(house){
         this.pushMatrix();
-        this.translate(2,4,6);
+        this.translate(2,1.7,6);
         this.house.display();
         this.popMatrix();
         }
@@ -139,7 +149,7 @@ let skybox      = 1,
 //NEST
         if (nest) {
         this.pushMatrix();
-        this.translate(8,4,2);
+        this.translate(8,1.8,2);
         this.house_side_mat.apply();
         this.nest.display();
         this.popMatrix();
@@ -159,6 +169,7 @@ let skybox      = 1,
 //BRANCHES
         if(branches) {
         this.pushMatrix();
+        this.branch_mat.apply();
         this.branches[0].display();
         this.popMatrix();
         }
@@ -170,6 +181,11 @@ let skybox      = 1,
         this.rotate(Math.PI/4, 1,0,1);
         this.scale(4,-4,4);
         this.lightning.display();
+        this.popMatrix();
+        }
+//TEST AREA
+        if(test){
+        this.pushMatrix();
         this.popMatrix();
         }
     }

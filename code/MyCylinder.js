@@ -14,48 +14,36 @@ class MyCylinder extends CGFobject {
         this.normals = [];
         this.texCoords = [];
 
-		var o = 1;
-        var ang = 0;
-        var alphaAng = 2*Math.PI/this.slices;
-        var u = 1.0 / this.slices; 
+        let ang = 0;
+        let alphaAng = 2 * Math.PI / this.slices;
 
-        for(var i = 0; i < this.slices - 1; i++){
-			// Declaration of the vertices of each face
-            var sa=Math.sin(ang);
-            var ca=Math.cos(ang);
+        for (let i = 0; i < this.slices; i++) {
+            let sa = Math.sin(ang),
+                ca = Math.cos(ang),
+                saa = Math.sin(ang + alphaAng),
+                caa = Math.cos(ang + alphaAng);
 
             this.vertices.push(ca, 0, -sa);
             this.vertices.push(ca, 1, -sa);
+            this.vertices.push(caa, 0, -saa);
+            this.vertices.push(caa, 1, -saa);
+
+            this.indices.push(4 * i, (4 * i + 3) % (4 * this.slices), (4 * i + 1) % (4 * this.slices));
+            this.indices.push(4 * i, (4 * i + 2) % (4 * this.slices), (4 * i + 3) % (4 * this.slices));
 
             this.normals.push(ca, 0, -sa);
             this.normals.push(ca, 0, -sa);
+            this.normals.push(caa, 0, -saa);
+            this.normals.push(caa, 0, -saa);
 
-			// Indices for displaying the face
-            this.indices.push((2*i), (2*i+2), (2*i+1));
-            this.indices.push((o), (o + 1), (o + 2));
-            o += 2;
-            
-            this.texCoords.push(sa, 0);
-            this.texCoords.push(sa, 1);
+            this.texCoords.push(0, 1);
+            this.texCoords.push(0, 0);
+            this.texCoords.push(1, 1);
+            this.texCoords.push(1, 0);
 
-            ang+=alphaAng;
+            ang += alphaAng;
         }
-		
-        var sa=Math.sin(ang);
-        var ca=Math.cos(ang);
-        
-        this.vertices.push(ca, 0, -sa);
-        this.vertices.push(ca, 1, -sa);
-		
-        this.normals.push(ca, 0, -sa);
-        this.normals.push(ca, 0, -sa);
-		
-		this.indices.push((o-1), 0, o);
-        this.indices.push(o, 0, 1);
-        
-        this.texCoords.push(sa, 0);
-        this.texCoords.push(sa, 1);
-            
+
         this.primitiveType = this.scene.gl.TRIANGLES;
         this.initGLBuffers();
     }
@@ -77,53 +65,53 @@ class MyTop extends CGFobject {
         this.normals = [];
         this.texCoords = [];
 
-        var ang = 0;
-        var alphaAng = 2*Math.PI/this.slices;
+        let ang = 0;
+        let alphaAng = 2 * Math.PI / this.slices;
 
-        for(var i = 0; i < this.slices - 1; i++){
-            var sa=Math.sin(ang);
-            var ca=Math.cos(ang);
-            
+        for (var i = 0; i < this.slices - 1; i++) {
+            let sa = Math.sin(ang);
+            let ca = Math.cos(ang);
+
             this.vertices.push(ca, 0, -sa);
             this.vertices.push(ca, 1, -sa);
-            
+
             this.normals.push(0, -1, 0);
             this.normals.push(0, 1, 0);
-            
+
             sa = sa / 2.0;
             ca = ca / 2.0;
-            
-            this.texCoords.push(sa+0.5, ca+0.5);
-            this.texCoords.push(sa+0.5, ca+0.5);
-            
-            ang+=alphaAng;
+
+            this.texCoords.push(sa + 0.5, ca + 0.5);
+            this.texCoords.push(sa + 0.5, ca + 0.5);
+
+            ang += alphaAng;
         }
-        var sa=Math.sin(ang);
-        var ca=Math.cos(ang);
-        
+        let sa = Math.sin(ang);
+        let ca = Math.cos(ang);
+
         this.vertices.push(ca, 0, -sa);
         this.vertices.push(ca, 1, -sa);
-		
+
         this.normals.push(0, -1, 0);
         this.normals.push(0, 1, 0);
-        
+
         sa = sa / 2.0;
         ca = ca / 2.0;
 
-        this.texCoords.push(sa+0.5, ca+0.5);
-        this.texCoords.push(sa+0.5, ca+0.5);
+        this.texCoords.push(sa + 0.5, ca + 0.5);
+        this.texCoords.push(sa + 0.5, ca + 0.5);
 
-        if(this.slices > 2){
-            var lower = 3;
-            var upper = 5;
-            for (i = 0; i < (this.slices - 2); i++){
+        if (this.slices > 2) {
+            let lower = 3;
+            let upper = 5;
+            for (i = 0; i < (this.slices - 2); i++) {
                 this.indices.push(1, lower, upper);
                 lower -= 1; upper -= 1;
                 this.indices.push(upper, lower, 0);
                 lower += 3; upper += 3;
             }
         }
-            
+
         this.primitiveType = this.scene.gl.TRIANGLES;
         this.initGLBuffers();
     }

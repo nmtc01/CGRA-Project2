@@ -7,16 +7,16 @@ class MyLightning extends MyLSystem {
 	constructor(scene) {
         super(scene);
 
-        this.axiom = "X";
+        this.axiom = "F";
         this.productions = { "F": [ "FF",
                                     "F[-X]F[+X]F" ],
-                             "X": [ "F[-X][X]F[-X]+FX", 
-                                    "F[/X][X]F[\\X]+X", 
-                                    "F[\\X][-X]F[-X]+FX",
-                                    "F[&X][+X]F[-X]+FX", 
-                                    "F[/X][\\X]F[-X]+FX",
-                                    "F[+X][/X]F[-X]+FX",
-                                    "F[\\X][&X]F[-X]+FX",] };
+                             "X": [ "F[-F][X]FXX", 
+                                    "F[+X][X]/X+XF", 
+                                    "F[X][-X]X-X",
+                                    "F&F[+X]FX[-X]", 
+                                    "F[/X]X[\\X]",
+                                    "F+F/XF[-X]\\X",
+                                    "F[\\X]&FF/X",] };
         this.angle = 25.0;
         this.iterations = 3;
         this.scaleFactor = 0.5;
@@ -90,7 +90,9 @@ class MyLightningQuad extends CGFobject {
 
     display(){
         this.scene.pushMatrix();
-        this.scene.scale(0.1,2,0.1);
+        this.scene.scale(0.1,4,0.1);
+        this.scene.translate(0,0.5,0);
+        this.scene.lightning_mat.apply();
         this.quad.display();
         this.scene.popMatrix();
     }
