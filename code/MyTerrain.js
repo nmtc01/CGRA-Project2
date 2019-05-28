@@ -4,10 +4,11 @@
  * @param scene - Reference to MyScene object
  */
 class MyTerrain extends CGFobject {
-	constructor(scene) {
+	constructor(scene, x, y, z) {
         super(scene);
 
         this.plane = new Plane(scene, 32);
+        this.scale = [x, y, z];
 
         this.initMaterials();
         this.initShaders();
@@ -38,6 +39,9 @@ class MyTerrain extends CGFobject {
         this.height_text.bind(1);
         this.gradient_text.bind(2);
         this.terrain_mat.apply();
+        this.scene.translate(0, -1, 0);
+        this.scene.rotate(-0.5 * Math.PI, 1, 0, 0);
+        this.scene.scale(this.scale[0], this.scale[1], this.scale[2]);
         this.plane.display();
         this.gradient_text.unbind(1);
         this.gradient_text.unbind(2);

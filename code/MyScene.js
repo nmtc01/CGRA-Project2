@@ -12,9 +12,8 @@ class MyScene extends CGFscene {
         this.initLights();
         this.initMaterials();
 
-        //Background color
+//DEFAULT
         this.gl.clearColor(0.0, 0.0, 0.0, 1.0);
-
         this.gl.clearDepth(100.0);
         this.gl.enable(this.gl.DEPTH_TEST);
         this.gl.enable(this.gl.CULL_FACE);
@@ -22,9 +21,9 @@ class MyScene extends CGFscene {
         this.enableTextures(true);
         this.setUpdatePeriod(50);
 
-        //Initialize scene objects
+//OBJECTS
         this.axis       = new CGFaxis(this);
-        this.terrain    = new MyTerrain(this);
+        this.terrain    = new MyTerrain(this, 60, 60, 45);
         this.house      = new MyHouse(this, 0, this.house_side_mat, this.house_roof_mat, this.house_column_mat);
         this.skybox     = new MyCubeMap(this);
         this.bird       = new MyBird(this);
@@ -38,13 +37,13 @@ class MyScene extends CGFscene {
         this.lightning  = new MyLightning(this);
         this.lightning.generate(this.lightning.axiom, this.lightning.productions, this.lightning.angle, this.lightning.iterations, this.lightning.scaleFactor);
 
-        this.time = 0;
-        this.cur_time = 0;
+//AUXILIARY
+        this.time       = 0;
+        this.cur_time   = 0;
 
-        //Objects connected to MyInterface
+//INTERFACE
         this.scaleFactor = 0.5;
         this.speedFactor = 0.5;
-
     }
     initLights() {
         this.lights[0].setPosition(15, 2, 5, 1);
@@ -53,7 +52,7 @@ class MyScene extends CGFscene {
         this.lights[0].update();
     }
     initCameras() {
-        this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(100, 50, 100), vec3.fromValues(-60, 0, -60));
+        this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(60, 80, 60), vec3.fromValues(-10,-10,-10));
     }
     initMaterials() {
 //TEXTURES
@@ -110,7 +109,7 @@ let skybox      = 1,
     lightning   = 1, 
     trees       = 0, 
     terrain     = 1,
-    branches    = 1;
+    branches    = 0;
 //SCENE
 //SKYBOX
         if(skybox){
@@ -146,16 +145,6 @@ let skybox      = 1,
         this.popMatrix();
         }
 
-//LIGHTNING
-        if(lightning){
-        this.pushMatrix();
-        this.translate(-10,20,-10);
-        this.rotate(Math.PI/4, 1,0,1);
-        this.scale(4,-4,4);
-        this.lightning.display();
-        this.popMatrix();
-        }
-
 //TREES
         if(trees){
         }
@@ -163,8 +152,6 @@ let skybox      = 1,
 //TERRAIN
         if(terrain){
             this.pushMatrix();
-            this.rotate(-0.5 * Math.PI, 1, 0, 0);
-            this.scale(60, 60, 45);
             this.terrain.display();
             this.popMatrix();
         }
@@ -173,6 +160,16 @@ let skybox      = 1,
         if(branches) {
         this.pushMatrix();
         this.branches[0].display();
+        this.popMatrix();
+        }
+        
+//LIGHTNING
+        if(lightning){
+        this.pushMatrix();
+        this.translate(-10,20,-10);
+        this.rotate(Math.PI/4, 1,0,1);
+        this.scale(4,-4,4);
+        this.lightning.display();
         this.popMatrix();
         }
     }
