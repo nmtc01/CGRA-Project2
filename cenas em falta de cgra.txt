@@ -12,13 +12,13 @@
 - movimento oscilatorio         [X]
 - bater de asas                 [X]
 - movimento x,z                 [X]
-- texturas                      [ ]
+- texturas                      [X]
 
 #MyTerrain:
 - textura                       [X]
-- altura                        [ ]
-- zona plana                    [ ]
-- gradiente                     [ ]
+- altura                        [X]
+- zona plana                    [X]
+- gradiente                     [X]
 
 #MyTreeBranch:
 - forma                         [X]
@@ -26,10 +26,10 @@
 
 #MyNest:
 - forma                         [X]
-- texturas                      [ ]
+- texturas                      [X]
 
 #MyLightning:
-- importar MyLSystem            [ ]
+- importar MyLSystem            [X]
 - pressionar 'L' para gerar     [ ]
 
 
