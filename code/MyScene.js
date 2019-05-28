@@ -97,42 +97,64 @@ class MyScene extends CGFscene {
         this.applyViewMatrix();
         this.setDefaultAppearance();
 
+let skybox      = 0, 
+    house       = 0, 
+    bird        = 0, 
+    nest        = 0, 
+    lightning   = 1, 
+    trees       = 0, 
+    terrain     = 0;
 //SCENE
 //SKYBOX
+        if(skybox){
         this.pushMatrix();
         this.skybox_day_mat.apply();
         this.skybox.display();
         this.popMatrix();
+        }
 
 //HOUSE
+        if(house){
         this.pushMatrix();
         this.house.display();
         this.popMatrix();
+        }
 
-//BIRD
+//BIRD  
+        if(bird){
         this.pushMatrix();
         this.scale(this.scaleFactor, this.scaleFactor, this.scaleFactor);
         this.bird.display(this);
         this.popMatrix();
+        }
 
 //NEST
+        if(nest){
         this.pushMatrix();
         this.nest.display();
         this.popMatrix();
+        }
 
 //LIGHTNING
+        if(lightning){
         this.pushMatrix();
         this.lightning.display();
         this.popMatrix();
+        }
 
 //TREES
+        if(trees){
+        
+        }
 
 //TERRAIN
+        if(terrain){
         this.pushMatrix();
         this.rotate(-0.5 * Math.PI, 1, 0, 0);
         this.scale(60, 60, 45);
         this.terrain.display();
         this.popMatrix();
+        }
     }
 
     checkKeys(t) {
