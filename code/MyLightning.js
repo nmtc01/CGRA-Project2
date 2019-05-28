@@ -12,14 +12,15 @@ class MyLightning extends MyLSystem {
                                     "F[-X]F[+X]F" ],
                              "X": [ "F[-X][X]F[-X]+FX", 
                                     "F[/X][X]F[\\X]+X", 
-                                    "F[\\X][X]/X",
-                                    "F[/X]\\X", 
-                                    "F[^X][X]F[&X]^X",
-                                    "F[^X]&X",
-                                    "F[&X]^X",] };
+                                    "F[\\X][-X]F[-X]+FX",
+                                    "F[&X][+X]F[-X]+FX", 
+                                    "F[/X][\\X]F[-X]+FX",
+                                    "F[+X][/X]F[-X]+FX",
+                                    "F[\\X][&X]F[-X]+FX",] };
         this.angle = 25.0;
         this.iterations = 3;
         this.scaleFactor = 0.5;
+        this.start_time = 0;
     }
     initGrammar(){
         this.grammar = {
@@ -28,17 +29,19 @@ class MyLightning extends MyLSystem {
         };
     }
     update(t){
-        if((t - this.start_time) < 1000){
-            this.depth = (t - this.start_time) / this.axiom.length;
+        if((t - this.start_time) <= 1000){
+            this.depth = ((t - this.start_time) / 1000) * this.axiom.length;
         }else{
             this.depth = 0;
         }
     }
     startAnimation(t){
-        console.log("ligthning at t="); console.log(t); console.log("\n");
-        this.start_time = t;
-        this.depth = 0;
-        this.iterate();
+        if((t - this.start_time) > 1000){
+            this.start_time = t;
+            this.depth = 0;
+            this.axiom = "X";
+            this.iterate();
+        }
     }
     display(){
         if(this.depth == 0) return;
