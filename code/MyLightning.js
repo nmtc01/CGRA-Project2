@@ -10,7 +10,7 @@ class MyLightning extends MyLSystem {
         this.axiom = "X";
         this.productions = { "F": [ "FF",
                                     "F[-X]F[+X]F" ],
-                             "X": [ " F[-X][X]F[-X]+FX", 
+                             "X": [ "F[-X][X]F[-X]+FX", 
                                     "F[/X][X]F[\\X]+X", 
                                     "F[\\X][X]/X",
                                     "F[/X]\\X", 
@@ -35,6 +35,7 @@ class MyLightning extends MyLSystem {
         }
     }
     startAnimation(t){
+        console.log("ligthning at t="); console.log(t); console.log("\n");
         this.start_time = t;
         this.depth = 0;
         this.iterate();
