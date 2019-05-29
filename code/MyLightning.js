@@ -4,57 +4,55 @@
  * @param scene - Reference to MyScene object
  */
 class MyLightning extends MyLSystem {
-	constructor(scene) {
+    constructor(scene) {
         super(scene);
 
         this.axiom = "F";
-        this.productions = { "F": [ "FF",
-                                    "F[-X]F[+X]F" ],
-                             "X": [ "F[-F][X]FXX", 
-                                    "F[+X][X]/X+XF", 
-                                    "F[X][-X]X-X",
-                                    "F&F[+X]FX[-X]", 
-                                    "F[/X]X[\\X]",
-                                    "F+F/XF[-X]\\X",
-                                    "F[\\X]&FF/X",] };
+        this.productions = {
+            "F": ["FF",
+                "F[-X]F[+X]F"],
+            "X": ["F[-F][X]FXX",
+                "F[+X][X]/X+XF",
+                "F[X][-X]X-X",
+                "F&F[+X]FX[-X]",
+                "F[/X]X[\\X]",
+                "F+F/XF[-X]\\X",
+                "F[\\X]&FF/X",]
+        };
         this.angle = 25.0;
         this.iterations = 3;
         this.scaleFactor = 0.5;
         this.start_time = 0;
     }
-    initGrammar(){
+    initGrammar() {
         this.grammar = {
             "F": new MyLightningQuad(this.scene),
             "X": new MyLightningQuad(this.scene)
         };
     }
-    update(t){
-        if((t - this.start_time) <= 1000){
+    update(t) {
+        if ((t - this.start_time) <= 1000) {
             this.depth = ((t - this.start_time) / 1000) * this.axiom.length;
-        }else{
+        } else {
             this.depth = 0;
         }
     }
-    startAnimation(t){
-        if((t - this.start_time) > 1000){
+    startAnimation(t) {
+        if ((t - this.start_time) > 1000) {
             this.start_time = t;
             this.depth = 0;
             this.axiom = "X";
             this.iterate();
         }
     }
-    display(){
-        if(this.depth == 0) return;
+    display() {
+        if (this.depth == 0) return;
         this.scene.pushMatrix();
         this.scene.scale(this.scale, this.scale, this.scale);
 
         var i;
-
-        // percorre a cadeia de caracteres
-        for (i=0; i<this.depth; ++i){
-
-            // verifica se sao caracteres especiais
-            switch(this.axiom[i]){
+        for (i = 0; i < this.depth; ++i) {
+            switch (this.axiom[i]) {
                 case "+": this.scene.rotate(this.angle, 0, 0, 1); break;
                 case "-": this.scene.rotate(-this.angle, 0, 0, 1); break;
                 case "\\": this.scene.rotate(this.angle, 1, 0, 0); break;
@@ -63,13 +61,9 @@ class MyLightning extends MyLSystem {
                 case "&": this.scene.rotate(-this.angle, 0, 1, 0); break;
                 case "[": this.scene.pushMatrix(); break;
                 case "]": this.scene.popMatrix(); break;
-
-                // processa primitiva definida na gramatica, se existir
                 default:
-                    var primitive=this.grammar[this.axiom[i]];
-
-                    if ( primitive )
-                    {
+                    var primitive = this.grammar[this.axiom[i]];
+                    if (primitive) {
                         primitive.display();
                         this.scene.translate(0, 1, 0);
                     }
@@ -82,16 +76,16 @@ class MyLightning extends MyLSystem {
 };
 
 class MyLightningQuad extends CGFobject {
-	constructor(scene) {
+    constructor(scene) {
         super(scene);
         this.scene = scene;
         this.quad = new MyQuad(scene);
     }
 
-    display(){
+    display() {
         this.scene.pushMatrix();
-        this.scene.scale(0.1,4,0.1);
-        this.scene.translate(0,0.5,0);
+        this.scene.scale(0.1, 4, 0.1);
+        this.scene.translate(0, 0.5, 0);
         this.scene.lightning_mat.apply();
         this.quad.display();
         this.scene.popMatrix();

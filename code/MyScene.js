@@ -22,20 +22,38 @@ class MyScene extends CGFscene {
         this.setUpdatePeriod(50);
 
 //OBJECTS
-        this.axis       = new CGFaxis(this);
-        this.terrain    = new MyTerrain(this, 60, 60, 30);
-        this.house      = new MyHouse(this, 0, this.house_side_mat, this.house_roof_mat, this.house_column_mat);
-        this.skybox     = new MyCubeMap(this);
-        this.bird       = new MyBird(this);
-        this.nest       = new MyNest(this);
-        this.branches = [];
+        this.axis        = new CGFaxis(this);
+        this.branches    = [];
+        this.trees       = [];
+        
+        this.terrain     = new MyTerrain(this, 60, 60, 30);
+        this.house       = new MyHouse(this, 0, this.house_side_mat, this.house_roof_mat, this.house_column_mat);
+        this.skybox      = new MyCubeMap(this);
+        this.bird        = new MyBird(this);
+        this.nest        = new MyNest(this);
+        
         this.branches[0] = new MyTreeBranch(this, 0, 4.1, 0, Math.PI, Math.PI/2);
         this.branches[1] = new MyTreeBranch(this);
         this.branches[2] = new MyTreeBranch(this);
         this.branches[3] = new MyTreeBranch(this);
         this.branches[4] = new MyTreeBranch(this);
-        this.lightning  = new MyLightning(this);
-        this.lightning.generate(this.lightning.axiom, this.lightning.productions, this.lightning.angle, this.lightning.iterations, this.lightning.scaleFactor);
+
+        this.trees[0]    = new MyLSPlant(this);
+        this.trees[1]    = new MyLSPlant(this); 
+        this.trees[2]    = new MyLSPlant(this); 
+        this.trees[3]    = new MyLSPlant(this); 
+        this.trees[4]    = new MyLSPlant(this); 
+        this.trees[5]    = new MyLSPlant(this); 
+        this.trees[6]    = new MyLSPlant(this); 
+        this.trees[7]    = new MyLSPlant(this);
+        
+        this.randCoords = [];
+        let i;
+        for(i = 0; i <= 7; i++){
+        this.randCoords.push(this.generateRandomCoords(-10,10));
+        }
+ 
+        this.lightning   = new MyLightning(this);
 
 //AUXILIARY
         this.time       = 0;
@@ -63,7 +81,7 @@ class MyScene extends CGFscene {
         this.house_column_text  = new CGFtexture(this, 'images/wood.jpeg');
         this.branch_text        = new CGFtexture(this, 'images/branch.png');
         this.branch_top_text    = new CGFtexture(this, 'images/branch_top.png');
-        this.lightning_text    = new CGFtexture(this, 'images/lightning.png');
+        this.lightning_text     = new CGFtexture(this, 'images/lightning.png');
 
 //MATERIALS
         this.skybox_day_mat     = new CGFappearance(this);
@@ -101,7 +119,12 @@ class MyScene extends CGFscene {
 
         this.time = t;
     }
-
+    generateRandomCoords(min, max){
+        let r1 = Math.random() * (max - min) + min,
+            r2 = 1.5,
+            r3 = Math.random() * (max - min) + min;
+        return [r1,r2,r3];
+    }
     display() {
         this.gl.viewport(0, 0, this.gl.canvas.width, this.gl.canvas.height);
         this.gl.clear(this.gl.COLOR_BUFFER_BIT | this.gl.DEPTH_BUFFER_BIT);
@@ -111,14 +134,14 @@ class MyScene extends CGFscene {
         this.applyViewMatrix();
         this.setDefaultAppearance();
 
-let skybox      = 1, 
-    house       = 1, 
-    bird        = 1, 
-    nest        = 1, 
-    lightning   = 1, 
+let skybox      = 0, 
+    house       = 0, 
+    bird        = 0, 
+    nest        = 0, 
+    lightning   = 0, 
     trees       = 1, 
     terrain     = 1,
-    branches    = 1,
+    branches    = 0,
     test        = 0;
 //SCENE
 //SKYBOX
@@ -157,13 +180,20 @@ let skybox      = 1,
 
 //TREES
         if(trees){
+        let i;
+        for(i = 0; i < this.trees.length; i++){
+        this.pushMatrix();
+        this.translate(this.randCoords[i][0], this.randCoords[i][1], this.randCoords[i][2]);
+        this.trees[i].display();
+        this.popMatrix();
+        }
         }
 
 //TERRAIN
         if(terrain){
-            this.pushMatrix();
-            this.terrain.display();
-            this.popMatrix();
+        this.pushMatrix();
+        this.terrain.display();
+        this.popMatrix();
         }
         
 //BRANCHES
