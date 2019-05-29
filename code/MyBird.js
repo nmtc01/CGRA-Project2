@@ -149,10 +149,6 @@ class MyBird extends CGFobject {
         this.bird_body_mat.apply();
         this.asa2.display();
         scene.popMatrix();
-        
-
-
-
     }
 
     turn(v) {
@@ -174,8 +170,6 @@ class MyBird extends CGFobject {
     update(t) {
         this.time += (0.1 * t * Math.PI);
         this.body_pos[0] += t * this.speed * Math.sin(this.body_rot[1]);
-        /*if (this.fall)
-            this.body_pos[1] -= t * this.speed;*/
         this.body_pos[2] += t * this.speed * Math.cos(this.body_rot[1]);  
     }
 
