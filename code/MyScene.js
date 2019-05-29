@@ -32,11 +32,11 @@ class MyScene extends CGFscene {
         this.bird        = new MyBird(this);
         this.nest        = new MyNest(this);
         
-        this.branches[0] = new MyTreeBranch(this, 0, 4.1, 0, Math.PI, Math.PI/2);
-        this.branches[1] = new MyTreeBranch(this);
-        this.branches[2] = new MyTreeBranch(this);
-        this.branches[3] = new MyTreeBranch(this);
-        this.branches[4] = new MyTreeBranch(this);
+        this.branches[0] = new MyTreeBranch(this, -5, 1.75, -5, Math.PI, Math.PI/2);
+        this.branches[1] = new MyTreeBranch(this, -6, 1.75, 5, Math.PI/2, 0);
+        this.branches[2] = new MyTreeBranch(this, -9, 1.75, 0, 0, 0);
+        this.branches[3] = new MyTreeBranch(this, 4.9, 2.57, -14, Math.PI, 4*Math.PI/10);
+        this.branches[4] = new MyTreeBranch(this, 5, 1.75, 2, Math.PI, Math.PI/2);
 
         this.trees[0]    = new MyLSPlant(this);
         this.trees[1]    = new MyLSPlant(this); 
@@ -136,12 +136,12 @@ class MyScene extends CGFscene {
 
 let skybox      = 0, 
     house       = 0, 
-    bird        = 0, 
+    bird        = 1, 
     nest        = 0, 
     lightning   = 0, 
-    trees       = 1, 
+    trees       = 0, 
     terrain     = 1,
-    branches    = 0,
+    branches    = 1,
     test        = 0;
 //SCENE
 //SKYBOX
@@ -163,8 +163,8 @@ let skybox      = 0,
 //BIRD
         if(bird){
         this.pushMatrix();
+        this.translate(12,10,3);
         this.scale(this.scaleFactor, this.scaleFactor, this.scaleFactor);
-        this.translate(16,10,3);
         this.bird.display(this);
         this.popMatrix();
         }
@@ -198,10 +198,13 @@ let skybox      = 0,
         
 //BRANCHES
         if(branches) {
-        this.pushMatrix();
         this.branch_mat.apply();
-        this.branches[0].display();
+        let j;
+        for(j = 0; j <this.branches.length; j++){
+        this.pushMatrix();
+        this.branches[j].display();
         this.popMatrix();
+        }
         }
         
 //LIGHTNING
@@ -226,6 +229,7 @@ let skybox      = 0,
         if (this.gui.isKeyPressed("KeyR")) this.bird.reset();
         if (this.gui.isKeyPressed("KeyA")) this.bird.turn(0.1);
         if (this.gui.isKeyPressed("KeyD")) this.bird.turn(-0.1);
+        //if (this.gui.isKeyPressed("KeyP")) this.bird.go_down();
         if (this.gui.isKeyPressed("KeyL")) this.lightning.startAnimation(t);
     }
 }

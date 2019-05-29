@@ -22,6 +22,7 @@ class MyBird extends CGFobject {
         this.body_pos = [0, 0, 0];                      // x - y - z
         this.speed = 0;
         this.time = 0;
+        this.fall = 0;
     }
 
     initMaterials() {
@@ -167,11 +168,14 @@ class MyBird extends CGFobject {
         this.body_rot = [0, 0, 0];
         this.body_pos = [0, 0, 0];
         this.speed = 0;
+        //this.fall = 0;
     }
 
     update(t) {
         this.time += (0.1 * t * Math.PI);
         this.body_pos[0] += t * this.speed * Math.sin(this.body_rot[1]);
+        /*if (this.fall)
+            this.body_pos[1] -= t * this.speed;*/
         this.body_pos[2] += t * this.speed * Math.cos(this.body_rot[1]);  
     }
 
@@ -183,6 +187,10 @@ class MyBird extends CGFobject {
         this.wing_rot[0] = -1 * Math.abs(this.speed * (Math.PI / 4) * Math.sin(this.time * 0.8));
         this.wing_rot[1] = Math.abs(this.speed * (Math.PI / 4) * Math.sin(this.time * 0.8)); 
     }
+
+    /*go_down() {
+        this.fall = 1;
+    }*/
 }
 
 
