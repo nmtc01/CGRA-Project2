@@ -182,12 +182,12 @@ class MyBird extends CGFobject {
 
     update(t) {
         this.time += (0.1 * t * Math.PI);
+        this.body_pos[0] += t * this.speed * Math.sin(this.body_rot[1]);
+        this.body_pos[2] += t * this.speed * Math.cos(this.body_rot[1]);
 
         switch(this.hunt) {
             case 0:
-                //this.body_rot[0] = 0;
-                this.body_pos[0] += t * this.speed * Math.sin(this.body_rot[1]);
-                this.body_pos[2] += t * this.speed * Math.cos(this.body_rot[1]); 
+                //this.body_rot[0] = 0; 
                 break;
             case 1:
                 //this.body_rot[0] = Math.PI/2;
