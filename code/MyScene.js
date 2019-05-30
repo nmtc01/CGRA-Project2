@@ -112,6 +112,7 @@ class MyScene extends CGFscene {
         this.checkKeys(t);
 
         this.bird.update(((t - this.time) / 50));
+        if (!this.bird.hunt)
         this.bird.oscilate();
         this.bird.wing_flap();
 
@@ -229,7 +230,7 @@ let skybox      = 0,
         if (this.gui.isKeyPressed("KeyR")) this.bird.reset();
         if (this.gui.isKeyPressed("KeyA")) this.bird.turn(0.1);
         if (this.gui.isKeyPressed("KeyD")) this.bird.turn(-0.1);
-        //if (this.gui.isKeyPressed("KeyP")) this.bird.go_down();
+        if (this.gui.isKeyPressed("KeyP")) this.bird.go_down();
         if (this.gui.isKeyPressed("KeyL")) this.lightning.startAnimation(t);
     }
 }
