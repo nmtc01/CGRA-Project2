@@ -66,8 +66,8 @@ class MyBird extends CGFobject {
 
     display(scene){
         scene.translate(this.body_pos[0], this.body_pos[1], this.body_pos[2]);
-        //scene.rotate(this.body_rot[0], 1, 0, 1);
         scene.rotate(this.body_rot[1], 0, 1, 0);
+        scene.rotate(this.body_rot[0], 1, 0, 0);
 
         scene.scale(0.75,0.75,0.75);
 
@@ -187,10 +187,10 @@ class MyBird extends CGFobject {
 
         switch(this.hunt) {
             case 0:
-                //this.body_rot[0] = 0; 
+                this.body_rot[0] = 0; 
                 break;
             case 1:
-                //this.body_rot[0] = Math.PI/2;
+                this.body_rot[0] = Math.PI/6;
                 this.body_pos[1] -= 0.8*t;
                 if (this.body_pos[1] < -14)
                     this.hunt = this.bird_mov.reach_ground;
@@ -199,7 +199,7 @@ class MyBird extends CGFobject {
                 this.hunt = this.bird_mov.ascend;
                 break;
             case 3:
-                //this.body_rot[0] = -Math.PI/2;
+                this.body_rot[0] = -Math.PI/6;
                 this.body_pos[1] += 0.8*t;
                 if (this.body_pos[1] > 0) {
                     this.body_pos[1] = 0;
