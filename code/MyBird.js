@@ -186,7 +186,6 @@ class MyBird extends CGFobject {
 
         switch(this.hunt) {
             case 0:
-                this.body_pos[1] = 0;
                 break;
             case 1:
                 this.body_pos[1] -= 0.8*t;
@@ -198,8 +197,10 @@ class MyBird extends CGFobject {
                 break;
             case 3:
                 this.body_pos[1] += 0.8*t;
-                if (this.body_pos[1] > -0.582)
+                if (this.body_pos[1] > 0) {
+                    this.body_pos[1] = 0;
                     this.hunt = this.bird_mov.normal_move;
+                }
                 break;
             case 4:
                 this.hunt = this.bird_mov.normal_move;
