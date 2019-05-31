@@ -229,7 +229,7 @@ class MyBird extends CGFobject {
     }
 
     verifyBranchesCollision() {
-        for (let i = 0; i < 5; i++) {
+        for (let i = 0; i < this.scene.branches.length; i++) {
             if (Math.sqrt((this.body_pos[0]-this.scene.branches[i].x)*(this.body_pos[0]-this.scene.branches[i].x)) < 2.3 &&
                 Math.sqrt((this.body_pos[2]-this.scene.branches[i].z)*(this.body_pos[2]-this.scene.branches[i].z)) < 2.3)
                 this.branch_found = 1;
