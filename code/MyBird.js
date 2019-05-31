@@ -17,7 +17,7 @@ class MyBird extends CGFobject {
         this.asa1 = new MyQuad(scene, undefined);
         this.asa2 = new MyTriangle(scene);
 
-        this.branches = [];
+        //this.branches = [];
 
         this.wing_rot = [0, 0];                         // arm - forearm
         this.body_rot = [0, 0, 0];                      // pitch - yaw - roll
@@ -33,6 +33,7 @@ class MyBird extends CGFobject {
         Object.freeze(this.bird_mov);
 
         this.hunt = this.bird_mov.normal_move;
+        this.branch_found = 0;
     }
 
     initMaterials() {
@@ -194,11 +195,14 @@ class MyBird extends CGFobject {
             case 1:
                 this.body_rot[0] = Math.PI/6;
                 this.body_pos[1] -= 0.8*t;
-                if (this.body_pos[1] < -14)
+                if (this.body_pos[1] < -14.5)
                     this.hunt = this.bird_mov.reach_ground;
                 break;
             case 2:
-                this.hunt = this.bird_mov.ascend;
+                this.verifyBranchesCollision();
+                if (this.branch_found)
+                    this.hunt = this.bird_mov.found_branch;
+                else this.hunt = this.bird_mov.ascend;
                 break;
             case 3:
                 this.body_rot[0] = -Math.PI/6;
@@ -210,6 +214,7 @@ class MyBird extends CGFobject {
                 break;
             case 4:
                 this.hunt = this.bird_mov.normal_move;
+                this.branch_found = 0;
                 break;
         } 
     }
@@ -221,6 +226,14 @@ class MyBird extends CGFobject {
     wing_flap() {
         this.wing_rot[0] = -1 * Math.abs(this.speed * (Math.PI / 4) * Math.sin(this.time * 0.8));
         this.wing_rot[1] = Math.abs(this.speed * (Math.PI / 4) * Math.sin(this.time * 0.8)); 
+    }
+
+    verifyBranchesCollision() {
+        for (let i = 0; i < 5; i++) {
+            if (Math.sqrt((this.body_pos[0]-this.scene.branches[i].x)*(this.body_pos[0]-this.scene.branches[i].x)) < 2.3 &&
+                Math.sqrt((this.body_pos[2]-this.scene.branches[i].z)*(this.body_pos[2]-this.scene.branches[i].z)) < 2.3)
+                this.branch_found = 1;
+        }
     }
 }
 

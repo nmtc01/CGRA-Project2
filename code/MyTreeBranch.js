@@ -19,6 +19,9 @@ class MyTreeBranch extends CGFobject {
         else this.height = 0.4;
 
         this.branch = new MyTopCylinder(scene, 5, scene.branch_mat, scene.branch_top_mat);
+        this.x = this.pos[0];
+        this.y = this.pos[1];
+        this.z = this.pos[2];
     }
 
     display() {
