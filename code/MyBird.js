@@ -17,6 +17,8 @@ class MyBird extends CGFobject {
         this.asa1 = new MyQuad(scene, undefined);
         this.asa2 = new MyTriangle(scene);
 
+        this.branches = [];
+
         this.wing_rot = [0, 0];                         // arm - forearm
         this.body_rot = [0, 0, 0];                      // pitch - yaw - roll
         this.body_pos = [0, 0, 0];                      // x - y - z

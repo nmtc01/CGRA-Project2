@@ -34,7 +34,7 @@ class MyScene extends CGFscene {
         
         this.branches[0] = new MyTreeBranch(this, -5, 1.75, -5, Math.PI, Math.PI/2);
         this.branches[1] = new MyTreeBranch(this, -6, 1.75, 5, Math.PI/2, 0);
-        this.branches[2] = new MyTreeBranch(this, -9, 1.75, 0, 0, 0);
+        this.branches[2] = new MyTreeBranch(this, -9, 1.75, -2, 0, 0);
         this.branches[3] = new MyTreeBranch(this, 4.9, 2.57, -14, Math.PI, 4*Math.PI/10);
         this.branches[4] = new MyTreeBranch(this, 5, 1.75, 2, Math.PI, Math.PI/2);
 
