@@ -238,7 +238,7 @@ let skybox      = 0,
                 dist_y = this.bird.body_pos[2]-this.branches[i].z, 
                 dist = Math.max(Math.abs(dist_x), Math.abs(dist_y));
 
-            if (dist < 3) {
+            if (dist < 2) {
                 this.bird.branch_found = 1;
                 this.bird.branch = this.branches[i];
                 this.branches[i] = undefined;
@@ -252,7 +252,7 @@ let skybox      = 0,
             dist_y = this.bird.body_pos[2]-this.nest.pos[2],
             dist = Math.max(Math.abs(dist_x), Math.abs(dist_y));
 
-        if (dist < 3) {
+        if (dist < 2) {
         this.nest.branches.push(this.bird.branch);
         this.bird.branch = undefined;
         this.bird.branch_found = 0;
