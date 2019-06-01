@@ -242,7 +242,6 @@ let skybox      = 1,
                 this.bird.branch_found = 1;
                 this.bird.branch = this.branches[i];
                 this.branches[i] = undefined;
-                console.log('BRANCH COLLISION');
             }
         }
     }
@@ -256,7 +255,6 @@ let skybox      = 1,
         this.nest.branches.push(this.bird.branch);
         this.bird.branch = undefined;
         this.bird.branch_found = 0;
-        console.log('NEST COLLISION');
         }
     }
 }
