@@ -11,17 +11,17 @@ class MyLightning extends MyLSystem {
         this.productions = {
             "F": ["FF",
                 "F[-X]F[+X]F"],
-            "X": ["F[-F][X]FXX",
+            "X": ["F[X]FX",
                 "F[+X][X]/X+XF",
                 "F[X][-X]X-X",
-                "F&F[+X]FX[-X]",
+                "F&[+X]FX[-X]",
                 "F[/X]X[\\X]",
-                "F+F/XF[-X]\\X",
+                "F+XF[-X]\\X",
                 "F[\\X]&FF/X",]
         };
         this.angle = 25.0;
         this.iterations = 3;
-        this.scaleFactor = 0.5;
+        this.scale = 0.5;
         this.start_time = 0;
     }
     initGrammar() {
@@ -39,6 +39,7 @@ class MyLightning extends MyLSystem {
     }
     startAnimation(t) {
         if ((t - this.start_time) > 1000) {
+            this.scene.light_coords = this.scene.generateRandomCoords(-10,10);
             this.start_time = t;
             this.depth = 0;
             this.axiom = "X";
@@ -49,6 +50,7 @@ class MyLightning extends MyLSystem {
         if (this.depth == 0) return;
         this.scene.pushMatrix();
         this.scene.scale(this.scale, this.scale, this.scale);
+
 
         var i;
         for (i = 0; i < this.depth; ++i) {

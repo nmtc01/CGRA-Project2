@@ -52,6 +52,8 @@ class MyScene extends CGFscene {
         for(i = 0; i <= 7; i++){
         this.randCoords.push(this.generateRandomCoords(-10,10));
         }
+        
+        this.light_coords = this.generateRandomCoords(-10,10);
  
         this.lightning   = new MyLightning(this);
 
@@ -208,10 +210,9 @@ let skybox      = 1,
 //LIGHTNING
         if(lightning){
         this.pushMatrix();
-        this.translate(-10,20,-10);
+        this.translate(this.light_coords[0],20,this.light_coords[2]);
         this.rotate(Math.PI/4, 1,0,1);
-        let coord = this.generateRandomCoords(-50,50);
-        this.scale(coord[0],coord[1],coord[2]);
+        this.scale(4,-4,4);
         this.lightning.display();
         this.popMatrix();
         }
