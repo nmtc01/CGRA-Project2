@@ -91,7 +91,13 @@ class MyNest extends CGFobject {
         this.scene.house_side_mat.apply();
         this.bot.display();
         this.scene.popMatrix();
-        
+
+        for (let i = 0; i < this.branches.length; i++) {
+        this.scene.pushMatrix();
+        this.scene.translate(-5, -1.5, -1);
+        this.branches[i].display();
+        this.scene.popMatrix();
+        }
         this.scene.popMatrix();
     }
 }

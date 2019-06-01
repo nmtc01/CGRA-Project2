@@ -136,12 +136,12 @@ class MyScene extends CGFscene {
         this.applyViewMatrix();
         this.setDefaultAppearance();
 
-let skybox      = 1, 
-    house       = 1, 
+let skybox      = 0, 
+    house       = 0, 
     bird        = 1, 
     nest        = 1, 
-    lightning   = 1, 
-    trees       = 1, 
+    lightning   = 0, 
+    trees       = 0, 
     terrain     = 1,
     branches    = 1,
     test        = 0;
@@ -255,6 +255,7 @@ let skybox      = 1,
         if (dist < 3) {
         this.nest.branches.push(this.bird.branch);
         this.bird.branch = undefined;
+        this.bird.branch_found = 0;
         console.log('NEST COLLISION');
         }
     }
