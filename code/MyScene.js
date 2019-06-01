@@ -211,7 +211,6 @@ let skybox      = 1,
         if(lightning){
         this.pushMatrix();
         this.translate(this.light_coords[0],15,this.light_coords[2]);
-        //this.rotate(Math.PI/4, 1,0,1);
         this.scale(4,-1,4);
         this.lightning.display();
         this.popMatrix();

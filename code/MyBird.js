@@ -33,6 +33,7 @@ class MyBird extends CGFobject {
         //Textures
         this.bird_body_text = new CGFtexture(this.scene, 'images/penas.jpg');
         this.bird_eye_text = new CGFtexture(this.scene, 'images/eye.png');
+        this.bird_bico_text = new CGFtexture(this.scene, 'images/bico.jpg');
 
         //Materials
         this.bird_body_mat = new CGFappearance(this.scene);
@@ -48,7 +49,7 @@ class MyBird extends CGFobject {
         this.bird_bico_mat.setDiffuse(1, 0.2, 0, 0.1);
         this.bird_bico_mat.setSpecular(0.1, 0.1, 0.1, 0.11);
         this.bird_bico_mat.setShininess(10.0);
-        //this.bird_bico_mat.setTexture(this.bird_body_text);
+        this.bird_bico_mat.setTexture(this.bird_bico_text);
         this.bird_bico_mat.setTextureWrap('REPEAT', 'REPEAT');
 
         this.bird_eye_mat = new CGFappearance(this.scene);
