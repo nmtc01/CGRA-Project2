@@ -119,7 +119,7 @@ class MyScene extends CGFscene {
     update(t) {
         this.checkKeys(t);
 
-        this.bird.update(  0.2 *  ((t - this.time) / 50));
+        this.bird.update(((t - this.time) / 50));
         //if (!this.bird.hunt) this.bird.oscilate();
         this.bird.wing_flap();
 
