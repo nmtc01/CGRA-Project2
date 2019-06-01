@@ -72,7 +72,7 @@ class MyScene extends CGFscene {
         this.lights[0].update();
     }
     initCameras() {
-        this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(30, 20, 30), vec3.fromValues(0,0,0));
+        this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(60, 30, 60), vec3.fromValues(0,0,0));
     }
     initMaterials() {
 //TEXTURES
@@ -144,7 +144,7 @@ let skybox      = 1,
     trees       = 1, 
     terrain     = 1,
     branches    = 1,
-    test        = 1;
+    test        = 0;
 //SCENE
 //SKYBOX
         if(skybox){
@@ -210,9 +210,9 @@ let skybox      = 1,
 //LIGHTNING
         if(lightning){
         this.pushMatrix();
-        this.translate(this.light_coords[0],20,this.light_coords[2]);
-        this.rotate(Math.PI/4, 1,0,1);
-        this.scale(4,-4,4);
+        this.translate(this.light_coords[0],15,this.light_coords[2]);
+        //this.rotate(Math.PI/4, 1,0,1);
+        this.scale(4,-1,4);
         this.lightning.display();
         this.popMatrix();
         }
@@ -234,8 +234,8 @@ let skybox      = 1,
     checkBranch() {
         for (let i = 0; i < this.branches.length; i++) {
             if(this.branches[i] == undefined) continue;
-            let dist_x = this.bird.body_pos[0]-this.branches[i].x, 
-                dist_y = this.bird.body_pos[2]-this.branches[i].z, 
+            let dist_x = this.bird.body_pos[0]-this.branches[i].pos[0], 
+                dist_y = this.bird.body_pos[2]-this.branches[i].pos[2], 
                 dist = Math.max(Math.abs(dist_x), Math.abs(dist_y));
 
             if (dist < 2) {
