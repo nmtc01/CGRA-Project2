@@ -32,7 +32,7 @@ class MyScene extends CGFscene {
         this.bird        = new MyBird(this);
         this.nest        = new MyNest(this, 8, 1.8, 2);
         
-        this.branches[0] = new MyTreeBranch(this, -5, 1.75, -5, Math.PI, Math.PI/2);
+        this.branches[0] = new MyTreeBranch(this, -4, 1.75, -4, Math.PI, Math.PI/2);
         this.branches[1] = new MyTreeBranch(this, -6, 1.75, 5, Math.PI/2, 0);
         this.branches[2] = new MyTreeBranch(this, -9, 1.75, -2, 0, 0);
         this.branches[3] = new MyTreeBranch(this, 4.9, 2.57, -14, Math.PI, 4*Math.PI/10);
@@ -78,7 +78,7 @@ class MyScene extends CGFscene {
         this.lights[0].update();
     }
     initCameras() {
-        this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(50, 40, 50), vec3.fromValues(0,0,0));
+        this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(50, 40, 0), vec3.fromValues(0,0,0));
     }
     initMaterials() {
 //TEXTURES

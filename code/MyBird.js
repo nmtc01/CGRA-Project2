@@ -224,12 +224,12 @@ class MyBird extends CGFobject {
     }
     wing_flap() {
         if (this.speed == 0) {
-            this.wing_rot[0] = -1 * Math.abs(0.4 * (Math.PI / 4) * Math.sin(this.time * 0.8));
-            this.wing_rot[1] = Math.abs(0.4 * (Math.PI / 4) * Math.sin(this.time * 0.8));
+            this.wing_rot[0] = -1 * Math.abs( (Math.PI / 4) * Math.sin(this.time * 0.8));
+            this.wing_rot[1] = Math.abs( (Math.PI / 4) * Math.sin(this.time * 0.8));
         }
         else {
-            this.wing_rot[0] = -1 * Math.abs(this.speed * (Math.PI / 4) * Math.sin(this.time * 0.8));
-            this.wing_rot[1] = Math.abs(this.speed * (Math.PI / 4) * Math.sin(this.time * 0.8));
+            this.wing_rot[0] = -1 * Math.abs(this.speed * Math.sin(this.time * 0.8));
+            this.wing_rot[1] = Math.abs(this.speed * Math.sin(this.time * 0.8));
         } 
     }
 }
