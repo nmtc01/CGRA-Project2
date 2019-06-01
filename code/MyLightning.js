@@ -23,11 +23,12 @@ class MyLightning extends MyLSystem {
         this.iterations = 3;
         this.scale = 0.5;
         this.start_time = 0;
+        this.cloud = new MyCloud(scene, 0, 0, 0);
     }
     initGrammar() {
         this.grammar = {
-            "F": new MyLightningQuad(this.scene),
-            "X": new MyLightningQuad(this.scene)
+            "F": new MyLightningPrim(this.scene),
+            "X": new MyLightningPrim(this.scene)
         };
     }
     update(t) {
@@ -47,8 +48,11 @@ class MyLightning extends MyLSystem {
         }
     }
     display() {
+        this.scene.cloud_mat.apply();
+        this.cloud.display();
         if (this.depth == 0) return;
         this.scene.pushMatrix();
+        this.scene.scale(4,-1,4);
         this.scene.scale(this.scale, this.scale, this.scale);
 
 
@@ -77,19 +81,18 @@ class MyLightning extends MyLSystem {
 
 };
 
-class MyLightningQuad extends CGFobject {
+class MyLightningPrim extends CGFobject {
     constructor(scene) {
         super(scene);
         this.scene = scene;
-        this.quad = new MyQuad(scene);
+        this.cyl = new MyCylinder(scene, 3);
     }
 
     display() {
         this.scene.pushMatrix();
-        this.scene.scale(0.1, 4, 0.1);
-        this.scene.translate(0, 0.5, 0);
+        this.scene.scale(0.05, 2, 0.05);
         this.scene.lightning_mat.apply();
-        this.quad.display();
+        this.cyl.display();
         this.scene.popMatrix();
     }
 };

@@ -15,7 +15,7 @@ class MyTerrain extends CGFobject {
     }
     initMaterials() {
         //Textures
-        this.terrain_text = new CGFtexture(this.scene, 'images/terrain3.jpg');
+        this.terrain_text = new CGFtexture(this.scene, 'images/terrain.jpg');
         this.height_text = new CGFtexture(this.scene, 'images/heightmap2.jpg');
         this.gradient_text = new CGFtexture(this.scene, 'images/altimetry.png');
 
