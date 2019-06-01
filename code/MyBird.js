@@ -9,13 +9,13 @@ class MyBird extends CGFobject {
 
         this.body = new MyTopCylinder(scene, 5, this.bird_body_mat, this.bird_body_mat);
         this.head = new MyTopCylinder(scene, 5, this.bird_body_mat, this.bird_body_mat);
-        
         this.bico = new MyCone(scene, 4);
         this.tail = new MyTriangle(scene);
         this.olho = new MyUnitCubeQuad(scene, this.bird_body_mat, this.bird_eye_mat, this.bird_body_mat);
-        
         this.asa1 = new MyQuad(scene, undefined);
         this.asa2 = new MyTriangle(scene);
+
+        this.branch = undefined;        // OBJECT NOT UNDEFINED IF BIRD HAS BRANCH
 
         this.wing_rot = [0, 0];                         // arm - forearm
         this.body_rot = [0, 0, 0];                      // pitch - yaw - roll
@@ -66,12 +66,13 @@ class MyBird extends CGFobject {
     }
 
     display(){
+//GLOBAL MOV
         this.scene.translate(this.body_pos[0], this.body_pos[1], this.body_pos[2]);
         this.scene.rotate(this.body_rot[1], 0, 1, 0);
         this.scene.rotate(this.body_rot[0], 1, 0, 0);
-
         this.scene.scale(this.scene.scaleFactor,this.scene.scaleFactor,this.scene.scaleFactor);
 
+//BODY
         this.scene.pushMatrix();
         this.scene.rotate(Math.PI/2, 0, 1, 0);
         this.scene.rotate(Math.PI/2, 0, 0, 1);
@@ -79,6 +80,7 @@ class MyBird extends CGFobject {
         this.body.display();
         this.scene.popMatrix();
 
+//HEAD
         this.scene.pushMatrix();
         this.scene.scale(1,1,1.2);
         this.scene.rotate(Math.PI/2, 0, 1, 0);
@@ -87,7 +89,8 @@ class MyBird extends CGFobject {
         this.bird_body_mat.apply();
         this.head.display();
         this.scene.popMatrix();
-        
+
+//BICO AND BRANCH
         this.scene.pushMatrix();
         this.scene.scale(0.4,0.3,0.5);
         this.scene.rotate(Math.PI/2, 0, 1, 0);
@@ -95,8 +98,10 @@ class MyBird extends CGFobject {
         this.scene.translate(0.5, 3.5, 0);
         this.bird_bico_mat.apply();
         this.bico.display();
+        if(this.branch != undefined)    this.branch.display();
         this.scene.popMatrix();
-        
+      
+//TAIL
         this.scene.pushMatrix();
         this.scene.rotate(Math.PI/2, 0, 1, 0);
         this.scene.scale(0.4,0.4,0.4);
@@ -104,14 +109,15 @@ class MyBird extends CGFobject {
         this.bird_body_mat.apply();
         this.tail.display();
         this.scene.popMatrix();
-        
+
+//EYES
         this.scene.pushMatrix();
         this.scene.scale(0.2,0.2,0.2);
         this.scene.translate(5, 4, 7.5);
         this.scene.rotate(Math.PI/2,0,0,1);
         this.olho.display();
         this.scene.popMatrix();
-        
+
         this.scene.pushMatrix();
         this.scene.scale(0.2,0.2,0.2);
         this.scene.translate(-5, 4, 7.5);
@@ -194,8 +200,7 @@ class MyBird extends CGFobject {
             case 1:
                 this.body_rot[0] = Math.PI/6;
                 this.body_pos[1] -= 0.18*t;
-                if (this.body_pos[1] < 3)
-                    this.hunt = this.bird_mov.reach_ground;
+                if (this.body_pos[1] < 3) this.hunt = this.bird_mov.reach_ground;
                 break;
             case 2:
                 this.scene.verifyBranchesCollision();

@@ -112,8 +112,7 @@ class MyScene extends CGFscene {
         this.checkKeys(t);
 
         this.bird.update(((t - this.time) / 50));
-        if (!this.bird.hunt)
-        this.bird.oscilate();
+        if (!this.bird.hunt) this.bird.oscilate();
         this.bird.wing_flap();
 
         this.lightning.update(t);
@@ -221,7 +220,6 @@ let skybox      = 0,
         this.popMatrix();
         }
     }
-
     checkKeys(t) {
         if (this.gui.isKeyPressed("KeyW")) this.bird.accelerate(this.speedFactor);
         if (this.gui.isKeyPressed("KeyS")) this.bird.accelerate(-this.speedFactor);
@@ -235,16 +233,20 @@ let skybox      = 0,
     verifyBranchesCollision() {
         for (let i = 0; i < this.branches.length; i++) {
             if (i == 0) {
-            console.log('x_bird = ' + this.bird.body_pos[0]);
-            console.log('x_branch = ' + this.branches[i].x);
-            console.log('z_bird = ' + this.bird.body_pos[2]);
-            console.log('z_branch = ' + this.branches[i].z);
+                console.log('x_bird = ' + this.bird.body_pos[0]);
+                console.log('x_branch = ' + this.branches[i].x);
+                console.log('z_bird = ' + this.bird.body_pos[2]);
+                console.log('z_branch = ' + this.branches[i].z);
             }
-            if (Math.sqrt((this.bird.body_pos[0]-this.branches[i].x)*(this.bird.body_pos[0]-this.branches[i].x)) < 2.3 &&
-                Math.sqrt((this.bird.body_pos[2]-this.branches[i].z)*(this.bird.body_pos[2]-this.branches[i].z)) < 2.3) {
+
+            let dist_x = this.bird.body_pos[0]-this.branches[i].x, 
+                dist_y = this.bird.body_pos[2]-this.branches[i].z, 
+                dist = Math.max(Math.abs(dist_x), Math.abs(dist_y));
+
+            if (dist < 3) {
                 this.bird.branch_found = 1;
                 console.log('encontrei um branch1');
-                }
+            }
         }
     }
 }
