@@ -49,8 +49,14 @@ class MyScene extends CGFscene {
         
         this.randCoords = [];
         let i;
-        for(i = 0; i <= 7; i++){
-        this.randCoords.push(this.generateRandomCoords(-10,10));
+        for(i = 0; i <= 2; i++){
+            this.randCoords.push(this.generateRandomCoords(-9,-4));
+        }
+        for(i = 3; i <= 5; i++){
+            this.randCoords.push([-2*i, 1.5,3*i]);
+        }
+        for(i = 6; i <= 7; i++){
+            this.randCoords.push(this.generateRandomCoords(4,9));
         }
         
         this.light_coords = this.generateRandomCoords(-10,10);
