@@ -5,8 +5,9 @@
 class MyNest extends CGFobject {
     constructor(scene, x, y, z, rot_x, rot_z, radius, height) {
         super(scene);
-        this.branch = new MyTreeBranch(scene, 0, 0, 0, 0, 0, 0.2, 1);
-        this.bot    = new MyTop(scene, 8);
+        this.branch     = new MyTreeBranch(scene, 0, 0, 0, 0, 0, 0.2, 1);
+        this.bot        = new MyTop(scene, 8);
+        this.branches   = [];
         
         if(x != undefined && y != undefined && z != undefined) this.pos = [x, y, z];
         else this.pos = [0, 0, 0];

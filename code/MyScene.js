@@ -30,7 +30,7 @@ class MyScene extends CGFscene {
         this.house       = new MyHouse(this, 0, this.house_side_mat, this.house_roof_mat, this.house_column_mat);
         this.skybox      = new MyCubeMap(this);
         this.bird        = new MyBird(this);
-        this.nest        = new MyNest(this);
+        this.nest        = new MyNest(this, 8, 1.8, 2);
         
         this.branches[0] = new MyTreeBranch(this, -5, 1.75, -5, Math.PI, Math.PI/2);
         this.branches[1] = new MyTreeBranch(this, -6, 1.75, 5, Math.PI/2, 0);
@@ -134,12 +134,12 @@ class MyScene extends CGFscene {
         this.applyViewMatrix();
         this.setDefaultAppearance();
 
-let skybox      = 0, 
-    house       = 0, 
+let skybox      = 1, 
+    house       = 1, 
     bird        = 1, 
-    nest        = 0, 
-    lightning   = 0, 
-    trees       = 0, 
+    nest        = 1, 
+    lightning   = 1, 
+    trees       = 1, 
     terrain     = 1,
     branches    = 1,
     test        = 0;
@@ -170,7 +170,6 @@ let skybox      = 0,
 //NEST
         if (nest) {
         this.pushMatrix();
-        this.translate(8,1.8,2);
         this.house_side_mat.apply();
         this.nest.display();
         this.popMatrix();
@@ -211,7 +210,8 @@ let skybox      = 0,
         this.pushMatrix();
         this.translate(-10,20,-10);
         this.rotate(Math.PI/4, 1,0,1);
-        this.scale(4,-4,4);
+        let coord = this.generateRandomCoords(-50,50);
+        this.scale(coord[0],coord[1],coord[2]);
         this.lightning.display();
         this.popMatrix();
         }
@@ -230,7 +230,7 @@ let skybox      = 0,
         if (this.gui.isKeyPressed("KeyP")) this.bird.go_down();
         if (this.gui.isKeyPressed("KeyL")) this.lightning.startAnimation(t);
     }
-    verifyBranchesCollision() {
+    checkBranch() {
         for (let i = 0; i < this.branches.length; i++) {
             if(this.branches[i] == undefined) continue;
             let dist_x = this.bird.body_pos[0]-this.branches[i].x, 
@@ -243,6 +243,18 @@ let skybox      = 0,
                 this.branches[i] = undefined;
                 console.log('BRANCH COLLISION');
             }
+        }
+    }
+    checkNest() {
+        if(this.bird.branch == undefined) return;
+        let dist_x = this.bird.body_pos[0]-this.nest.pos[0],
+            dist_y = this.bird.body_pos[2]-this.nest.pos[2],
+            dist = Math.max(Math.abs(dist_x), Math.abs(dist_y));
+
+        if (dist < 3) {
+        this.nest.branches.push(this.bird.branch);
+        this.bird.branch = undefined;
+        console.log('NEST COLLISION');
         }
     }
 }
