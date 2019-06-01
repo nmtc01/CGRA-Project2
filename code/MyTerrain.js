@@ -39,10 +39,12 @@ class MyTerrain extends CGFobject {
         this.height_text.bind(1);
         this.gradient_text.bind(2);
         this.terrain_mat.apply();
+        this.scene.pushMatrix();
         this.scene.translate(0, -1, 0);
         this.scene.rotate(-0.5 * Math.PI, 1, 0, 0);
         this.scene.scale(this.scale[0], this.scale[1], this.scale[2]);
         this.plane.display();
+        this.scene.popMatrix();
         this.gradient_text.unbind(1);
         this.gradient_text.unbind(2);
     }
