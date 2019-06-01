@@ -101,6 +101,8 @@ class MyBird extends CGFobject {
         this.branch.pos[0] = 0;
         this.branch.pos[1] = 0;
         this.branch.pos[2] = 0;
+        this.branch.rot[0] = 0;
+        this.branch.rot[1] = Math.PI/2;
         this.scene.translate(0.21,0,1.1);
         this.branch.display();
         this.scene.popMatrix();

@@ -94,7 +94,7 @@ class MyNest extends CGFobject {
 
         for (let i = 0; i < this.branches.length; i++) {
         this.scene.pushMatrix();
-        this.scene.translate(-i*0.1, 0.1, -i*0.1);
+        this.scene.translate(0.6-i*0.2, 0.1, 0.6-i*0.2);
         this.branches[i].display();
         this.scene.popMatrix();
         }
