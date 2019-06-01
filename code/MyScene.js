@@ -136,15 +136,15 @@ class MyScene extends CGFscene {
         this.applyViewMatrix();
         this.setDefaultAppearance();
 
-let skybox      = 0, 
-    house       = 0, 
+let skybox      = 1, 
+    house       = 1, 
     bird        = 1, 
     nest        = 1, 
-    lightning   = 0, 
-    trees       = 0, 
+    lightning   = 1, 
+    trees       = 1, 
     terrain     = 1,
     branches    = 1,
-    test        = 0;
+    test        = 1;
 //SCENE
 //SKYBOX
         if(skybox){
