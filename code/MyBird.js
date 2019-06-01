@@ -98,10 +98,10 @@ class MyBird extends CGFobject {
         if(this.branch != undefined){ 
         this.scene.pushMatrix();
         this.scene.scale(1/this.scene.scaleFactor, 1/this.scene.scaleFactor, 1/this.scene.scaleFactor);
-        this.branch.x = 0;
-        this.branch.y = 0;
-        this.branch.z = 0;
-        this.scene.translate(-4.8,-1.8,-1);
+        this.branch.pos[0] = 0;
+        this.branch.pos[1] = 0;
+        this.branch.pos[2] = 0;
+        this.scene.translate(0.21,0,1.1);
         this.branch.display();
         this.scene.popMatrix();
         }
