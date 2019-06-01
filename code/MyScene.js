@@ -78,7 +78,7 @@ class MyScene extends CGFscene {
         this.lights[0].update();
     }
     initCameras() {
-        this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(50, 40, 0), vec3.fromValues(0,0,0));
+        this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(10, 10, 10), vec3.fromValues(0,5,0));
     }
     initMaterials() {
 //TEXTURES
@@ -119,8 +119,8 @@ class MyScene extends CGFscene {
     update(t) {
         this.checkKeys(t);
 
-        this.bird.update(((t - this.time) / 50));
-        if (!this.bird.hunt) this.bird.oscilate();
+        this.bird.update(  0.2 *  ((t - this.time) / 50));
+        //if (!this.bird.hunt) this.bird.oscilate();
         this.bird.wing_flap();
 
         this.lightning.update(t);
@@ -142,14 +142,14 @@ class MyScene extends CGFscene {
         this.applyViewMatrix();
         this.setDefaultAppearance();
 
-let skybox      = 0, 
-    house       = 0, 
+let skybox      = 1, 
+    house       = 1, 
     bird        = 1, 
-    nest        = 0, 
-    lightning   = 0, 
-    trees       = 0, 
+    nest        = 1, 
+    lightning   = 1, 
+    trees       = 1, 
     terrain     = 1,
-    branches    = 0;
+    branches    = 1;
 
 //SCENE
 //SKYBOX

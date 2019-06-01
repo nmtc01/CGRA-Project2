@@ -134,22 +134,26 @@ class MyBird extends CGFobject {
         this.olho.display();
         this.scene.popMatrix();
 
+
+        let sin = Math.sin(this.wing_rot[0]),
+            cos = Math.cos(this.wing_rot[0]);
+
+
         //LEFT WING
         this.scene.pushMatrix();
         this.scene.rotate(Math.PI / 2, 1, 0, 0);
         this.scene.translate(1.25, 0.5, 0);
-        this.scene.translate(0, 0, Math.sin(this.wing_rot[0]));
+        this.scene.translate(0, 0, sin);
         this.scene.rotate(-this.wing_rot[0], 0, 1, 0);
         this.bird_body_mat.apply();
         this.asa1.display();
         this.scene.popMatrix();
 
         this.scene.pushMatrix();
-        this.scene.scale(0.5, 0.5, 0.5);
+        this.scene.translate(1.25 + cos, - sin, 0.5);
         this.scene.rotate(Math.PI / 2, 1, 0, 0);
-        this.scene.translate(4.5, 1, 0);
-        this.scene.translate(2-Math.cos(this.wing_rot[0]), 0, Math.sin(this.wing_rot[0]));
         this.scene.rotate(this.wing_rot[0], 0, 1, 0);
+        this.scene.scale(0.5, 0.5, 0.5);
         this.bird_body_mat.apply();
         this.asa2.display();
         this.scene.popMatrix();
@@ -158,19 +162,18 @@ class MyBird extends CGFobject {
         this.scene.pushMatrix();
         this.scene.rotate(Math.PI / 2, 1, 0, 0);
         this.scene.translate(-1.25, 0.5, 0);
-        this.scene.translate(0, 0, Math.sin(this.wing_rot[0]));
+        this.scene.translate(0, 0, sin);
         this.scene.rotate(this.wing_rot[0], 0, 1, 0);
         this.bird_body_mat.apply();
         this.asa1.display();
         this.scene.popMatrix();
 
         this.scene.pushMatrix();
-        this.scene.scale(0.5, 0.5, 0.5);
+        this.scene.translate(-1.25 - cos, - sin, 0.5);
+        this.scene.rotate(Math.PI / 2, 1, 0, 0);
         this.scene.rotate(Math.PI, 0, 1, 0);
-        this.scene.rotate(Math.PI / 2, -1, 0, 0);
-        this.scene.translate(4.5, 1, 0);
-
-
+        this.scene.rotate(this.wing_rot[0], 0, -1, 0);
+        this.scene.scale(0.5, 0.5, 0.5);
         this.bird_body_mat.apply();
         this.asa2.display();
         this.scene.popMatrix();
