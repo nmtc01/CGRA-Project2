@@ -39,10 +39,13 @@ class MyLeaf extends CGFobject {
 	constructor(scene) {
 		super(scene);
         this.tri = new MyPyramid(scene, 3);
+
+        this.leaf_text = new CGFtexture(this.scene, 'images/leaf.jpg');
         
         this.mat = new CGFappearance(scene)
         this.mat.setAmbient(0.1, 0.8, 0.1, 1);
         this.mat.setShininess(10.0);
+        this.mat.setTexture(this.leaf_text);
 
     }
 
