@@ -149,8 +149,7 @@ let skybox      = 1,
     lightning   = 1, 
     trees       = 1, 
     terrain     = 1,
-    branches    = 1,
-    test        = 0;
+    branches    = 1;
 //SCENE
 //SKYBOX
         if(skybox){
@@ -219,11 +218,6 @@ let skybox      = 1,
         this.translate(this.light_coords[0],15,this.light_coords[2]);
         this.scale(4,-1,4);
         this.lightning.display();
-        this.popMatrix();
-        }
-//TEST AREA
-        if(test){
-        this.pushMatrix();
         this.popMatrix();
         }
     }
