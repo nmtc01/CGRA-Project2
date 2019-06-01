@@ -197,10 +197,11 @@ let skybox      = 0,
 //BRANCHES
         if(branches) {
         this.branch_mat.apply();
-        let j;
-        for(j = 0; j <this.branches.length; j++){
+        let i;
+        for(i = 0; i < this.branches.length; i++){
+        if(this.branches[i] == undefined) continue;
         this.pushMatrix();
-        this.branches[j].display();
+        this.branches[i].display();
         this.popMatrix();
         }
         }
@@ -229,23 +230,18 @@ let skybox      = 0,
         if (this.gui.isKeyPressed("KeyP")) this.bird.go_down();
         if (this.gui.isKeyPressed("KeyL")) this.lightning.startAnimation(t);
     }
-
     verifyBranchesCollision() {
         for (let i = 0; i < this.branches.length; i++) {
-            if (i == 0) {
-                console.log('x_bird = ' + this.bird.body_pos[0]);
-                console.log('x_branch = ' + this.branches[i].x);
-                console.log('z_bird = ' + this.bird.body_pos[2]);
-                console.log('z_branch = ' + this.branches[i].z);
-            }
-
+            if(this.branches[i] == undefined) continue;
             let dist_x = this.bird.body_pos[0]-this.branches[i].x, 
                 dist_y = this.bird.body_pos[2]-this.branches[i].z, 
                 dist = Math.max(Math.abs(dist_x), Math.abs(dist_y));
 
             if (dist < 3) {
                 this.bird.branch_found = 1;
-                console.log('encontrei um branch1');
+                this.bird.branch = this.branches[i];
+                this.branches[i] = undefined;
+                console.log('BRANCH COLLISION');
             }
         }
     }
