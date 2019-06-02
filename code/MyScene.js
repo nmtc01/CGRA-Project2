@@ -120,7 +120,7 @@ class MyScene extends CGFscene {
         this.checkKeys(t);
 
         this.bird.update(((t - this.time) / 50));
-        //if (!this.bird.hunt) this.bird.oscilate();
+        if (!this.bird.hunt) this.bird.oscilate();
         this.bird.wing_flap();
 
         this.lightning.update(t);
